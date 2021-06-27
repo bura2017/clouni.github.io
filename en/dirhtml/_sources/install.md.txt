@@ -37,7 +37,7 @@ python setup.py install
 
 ## Dockerfile
 
-[*clouni-server*](../) can be started as container with help of Docker.
+[*clouni-server*](../server/) can be started as container with help of Docker.
 Container support both server and CLI version.
 
 From *dockerfile* you can get image for clouni-server container:
