@@ -107,7 +107,7 @@ def setup(app):
 
 html_theme_options = {
     "navbar_site_name": "",
-    "navbar_links": [("English Version", "../../en/index")]
+    "navbar_links": [("English Version", "../../en/dirhtml/index")]
 }
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
