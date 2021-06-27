@@ -131,6 +131,24 @@ python setup.py install
 python setup.py install
 </pre></div>
 </div>
+<div class="section" id="dockerfile">
+<span id="dockerfile"></span><h2>Dockerfile<a class="headerlink" href="#dockerfile" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../"><em>clouni-server</em></a> can be started as container with help of Docker.
+Container support both server and CLI version.</p>
+<p>From <em>dockerfile</em> you can get image for clouni-server container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd $CLOUNI_HOME
+sudo docker build -t clouni - &lt; dockerfile
+</pre></div>
+</div>
+<p>Then start the server on <em>IP_address:port</em> you needed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">name</span> <span class="n">clouni</span><span class="o">-</span><span class="n">server</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="n">IP_address</span><span class="p">:</span><span class="n">port</span><span class="p">:</span><span class="mi">50051</span> <span class="n">clouni</span>
+</pre></div>
+</div>
+<p>Or use <a class="reference external" href="https://hub.docker.com/r/clouni/clouni">Dockerhub version</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">name</span> <span class="n">clouni</span><span class="o">-</span><span class="n">server</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">ip_address</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">50051</span> <span class="n">clouni</span><span class="o">/</span><span class="n">clouni</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

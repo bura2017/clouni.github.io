@@ -34,3 +34,23 @@ Installation command
 cd $CLOUNI_HOME
 python setup.py install
 ~~~
+
+## Dockerfile
+
+[*clouni-server*](../) can be started as container with help of Docker.
+Container support both server and CLI version.
+
+From *dockerfile* you can get image for clouni-server container:
+~~~
+cd $CLOUNI_HOME
+sudo docker build -t clouni - < dockerfile
+~~~
+Then start the server on *IP_address:port* you needed:
+~~~
+sudo docker run --name clouni-server -d -p IP_address:port:50051 clouni
+~~~
+
+Or use [Dockerhub version](https://hub.docker.com/r/clouni/clouni):
+~~~
+sudo docker run --name clouni-server -d -p <ip_address>:<port>:50051 clouni/clouni:latest
+~~~

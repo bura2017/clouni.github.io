@@ -279,3 +279,11 @@ and define two variables `matched_object` and `matched_objects` in the end.
 Variable `matched_objects` contains list of all matched facts and `matched_object` should contain one of them.
 
 **ATTENTION** If there are more then one matched facts the last is taken as matched fact
+
+## Michman
+
+Use `michman-integration` branch to see Michman specific templates.
+
+~~~shell
+git checkout michman-integration
+~~~
