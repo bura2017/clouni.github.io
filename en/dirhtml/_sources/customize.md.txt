@@ -1,9 +1,11 @@
 # Customizing
+*************
 
 ## Adding new provider
 
 Template of project files structure:
-~~~
+
+```textmate
 .ansible/
 |-- plugins
 |   |-- module_utils
@@ -14,7 +16,7 @@ toscatranslator/
 |   |   |-- provider.cfg
 |   |   |-- tosca_elements_map_to_provider.json
 |   |   |-- TOSCA_<provider>_definition_1_0.yaml
-~~~
+```
 
 The `<provider>` means the provider's unique nic. Adding new provider
 includes several steps.
@@ -25,29 +27,27 @@ There is set of common parameters to launch virtual machine. This
 parameters are manages in different ways by different providers and a
 unified by TOSCA.
 
-* _private address_ - the primary private IP address assigned by the cloud
-provider that applications may use to access the Compute node.
-* _public address_ - he primary public IP address assigned by the cloud
-provider that applications may use to access the Compute node.
-* _networks/ports_: network names or ids or port names or ids or addresses
-* _host_: number of CPUs, disk size, RAM size or CPU frequency
-* _endpoint_ - network access endpoint capability
-  * _protocol_ - http, https, ftp, tcp, udp, etc
-  * _port_ of endpoint
-  * _url path_ of endpoint's address if applicable for the protocol
-  * _port name_ which endpoint should be bound to
-  * _network name_ which endpoint should be bound to
-  * _initiator_ - one of: source, target, peer
-  * _IP address_ as propagated up by the associated node’s host (Compute)
+* *private address* - the primary private IP address assigned by the cloud provider that applications may use to access the Compute node.
+* *public address* - he primary public IP address assigned by the cloud provider that applications may use to access the Compute node.
+* *networks/ports*: network names or ids or port names or ids or addresses
+* *host*: number of CPUs, disk size, RAM size or CPU frequency
+* *endpoint* - network access endpoint capability
+  * *protocol* - http, https, ftp, tcp, udp, etc
+  * *port* of endpoint
+  * *url path* of endpoint's address if applicable for the protocol
+  * *port name* which endpoint should be bound to
+  * *network name* which endpoint should be bound to
+  * *initiator* - one of: source, target, peer
+  * *IP address* as propagated up by the associated node’s host (Compute)
   container
-  * if _secured_ connection
-* _os_ - operating system parameters:
-  * _architecture_ - x86_32, x86_64, etc.
-  * _type_ - linux, aix, mac, windows, etc.
-  * _distribution_ -  debian, fedora, rhel and ubuntu
-  * _version_
-* _scalable_: min, default, max of instances to launch
-* _volumes_: local storages
+  * if *secured* connection
+* *os* - operating system parameters:
+  * *architecture* - x86_32, x86_64, etc.
+  * *type* - linux, aix, mac, windows, etc.
+  * *distribution* -  debian, fedora, rhel and ubuntu
+  * *version*
+* *scalable*: min, default, max of instances to launch
+* *volumes*: local storages
 
 ### Step 1: Defining main components of cloud provider
 
@@ -57,7 +57,8 @@ parameters (instances, images, security groups, etc.)
 Define main components definitions in language specified by TOSCA.
 
 The template of definition file must be:
-~~~
+
+```yaml
 tosca_definitions_version: tosca_simple_yaml_1_0
 capability_types:
     <provider>.capabilities.Root:
@@ -83,7 +84,7 @@ relationship_types:
         derived_from: tosca.relationships.DependsOn
         valid_target_types: [ <provider>.capabilities.Node ]
     <...>
-~~~
+```
 
 Examples can be found in `toscatranslator/providers/<provider>`
 directories.
@@ -99,10 +100,10 @@ to describe the mapping are provided.
 The parameters of TOSCA normative node type are determined as keys, and
 the parameters of the provider node types are determined as values. All
 parameters name must include the node type and the parameter section and
-name, which called _extended parameter name_. For example,
+name, which called *extended parameter name*. For example,
 `tosca.nodes.Compute.attributes.private_address`.
 
-The values are represented in format, called _value format_. The value
+The values are represented in format, called *value format*. The value
 format can be of type list, map and string. If the value is of type map,
 then it's one of the following cases:
 
@@ -112,13 +113,14 @@ this parameter, `keyname` specialises the name of the node topology in
 which to add this parameter, `keyname` can be used to create several
 nodes of the same type. Be attentive and sure you don't set existing names.
 Example:
-  ~~~
-  tosca.nodes.Compute.capabilities.host.properties
-             .num_cpus:
-  parameter: openstack.nodes.Server.requirements
-             .flavor.node_filter.properties.vcpus
-  value: {self[value]}
-  ~~~
+  
+~~~yaml
+tosca.nodes.Compute.capabilities.host.properties
+           .num_cpus:
+parameter: openstack.nodes.Server.requirements
+           .flavor.node_filter.properties.vcpus
+value: {self[value]}
+~~~
 * keys are `error`, `reason`: used if the parameter cannot be specified
 in TOSCA template for a certain reason.
 
@@ -133,40 +135,42 @@ arguments of module and `extra` are the extra parameters of the task,
 it can be unnecessary but must be defined any way,
 `executor` represents the configuration tool or some
 another supported executor (ex. ansible, python). Example:
-  ~~~
-    - source: set_fact
-    executor: ansible
-    parameters:
-      new_var: 1
-    value: tmp_value
-  # example with python script
-    - source: transform_units
-      parameters:
-        source_value: "{self[value]}"
-        is_without_b: True
-      executor: python
-      value: default
-  ~~~
+  
+~~~yaml
+- source: set_fact
+  executor: ansible
+  parameters:
+    new_var: 1
+  value: tmp_value
+# example with python script
+- source: transform_units
+  parameters:
+    source_value: "{self[value]}"
+    is_without_b: True
+  executor: python
+  value: default
+~~~
 
 * keys are `value`, `condition`, `facts`, `arguments`, `executor`: used if the value must
 be first chosen from existing cloud resources, `facts` represents the source which is use to get list
 of cloud resources paramters, facts need to be filtered for some value satisfying some `condition` and its
 `arguments`. Three conditions are supported: `equals`, `contains`, `ip_contains`. Example:
-  ~~~
-  tosca.nodes.Compute.attributes.networks.*
-                  .addresses:
-  parameter: openstack.nodes.Server.requirements
-                  .nics.node_filter.properties.id
-  value:
-    - value: network_id
-    condition: ip_contains
-    facts: os_subnets_facts.ansible_facts.openstack_subnets
-    executor: ansible
-    arguments:
-    - allocation_pool_start
-    - allocation_pool_end
-    - "{self[value]}"
-  ~~~
+
+~~~yaml
+tosca.nodes.Compute.attributes.networks.*
+                .addresses:
+parameter: openstack.nodes.Server.requirements
+                .nics.node_filter.properties.id
+value:
+  - value: network_id
+  condition: ip_contains
+  facts: os_subnets_facts.ansible_facts.openstack_subnets
+  executor: ansible
+  arguments:
+  - allocation_pool_start
+  - allocation_pool_end
+  - "{self[value]}"
+~~~
 
 **ATTENTION**. Please don't use reserved keys in you mapping values,
 ex. replace 'parameter' key by 'input_parameter'.
@@ -174,7 +178,7 @@ ex. replace 'parameter' key by 'input_parameter'.
 The interpreter also defines a variable `self` that can be used to store
 and read some values in a key-value format. For example:
 
-~~~
+~~~yaml
 tosca.nodes.Compute.endpoint.attributes.ip_address:
   parameter: {self[buffer][security_group_rule][cidr_ip]}
   value: {self[value]}
@@ -210,7 +214,8 @@ the following (sorted by priority):
 `<provider>` means provider's nic in Clouni
 
 It has required settings for Clouni execution:
-~~~
+
+~~~ini
 [main]
 tosca_elements_definition_file = TOSCA_openstack_definition_1_0.yaml
 tosca_elements_map_file = tosca_elements_map_to_openstack.yaml
@@ -225,7 +230,7 @@ provider configuration file is located.
 Configuration tools are configured for every provider in provider configuration file.
 Settings must be in section names with the configuration tool. For example:
 
-~~~
+~~~ini
 [ansible]
 module_prefix = os_
 module_description = Create OpenStack component
@@ -241,7 +246,7 @@ If the mapping from Step 2 uses TOSCA `node_filter`
 ([example](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/os/TOSCA-Simple-Profile-YAML-v1.0-os.html#_Toc471725299)),
 then the following section must be specified for every supported configuration tool:
 
-~~~
+~~~ini
 [ansible.node_filter]
 node_filter_source_prefix = os_
 node_filter_source_postfix = _facts
@@ -279,11 +284,3 @@ and define two variables `matched_object` and `matched_objects` in the end.
 Variable `matched_objects` contains list of all matched facts and `matched_object` should contain one of them.
 
 **ATTENTION** If there are more then one matched facts the last is taken as matched fact
-
-## Michman
-
-Use `michman-integration` branch to see Michman specific templates.
-
-~~~shell
-git checkout michman-integration
-~~~

@@ -1,5 +1,7 @@
-# Client-server model
-## Usage of server
+# gRPC client-server 
+********************
+
+## Start server with CLI
 
 You need to implement client using specification
 located at *toscatranslator/api.proto*, or use CLI-client *clouni-client*
@@ -14,7 +16,7 @@ Log file is `./.clouni-server.log`
 clouni-server --help
 ~~~
 Output:
-~~~
+~~~textmate
 usage: clouni-server [-h] [--max-workers <number of workers>]
                      [--host <host_name/host_address>] [--port <port>]
                      [--verbose] [--no-host-error] [--stop] [--foreground]
@@ -42,12 +44,12 @@ Server will be started on 127.0.0.1:50051 with 'warning' logger verbosity level
 Warning about unability to start server on 20.20.20.20 will be logged
 
 By default, server works in background
-## Usage of CLI gRPC client
+## Use gRPC client with CLI
 ~~~shell
 clouni-client --help
 ~~~
 Output:
-~~~
+~~~textmate
 usage: clouni-client [-h] --template-file <filename> --cluster-name
                      CLUSTER_NAME [--validate-only] [--delete]
                      [--provider PROVIDER] [--output-file <filename>]
@@ -87,7 +89,7 @@ clouni-server
 clouni-client --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
 ~~~
 Output:
-~~~
+~~~text
 Server started
 * Status *
 
@@ -109,7 +111,7 @@ clouni-server
 clouni-client --template-file examples/tosca-server-example.yaml --cluster-name example --provider kubernetes
 ~~~
 Output:
-~~~
+~~~text
 * Status *
 
 ERROR
@@ -158,11 +160,11 @@ UnsupportedToscaParameterUsage: Unable to use unsupported TOSCA parameter: netwo
 
 *clouni-server* can be started as container with help of Docker.
 From *dockerfile* you can get image for clouni-server container:
-~~~
+~~~shell
 cd $CLOUNI_HOME
-sudo docker build -t clouni - < dockerfile
+docker build -t clouni - < dockerfile
 ~~~
 Then start the server on *IP_address:port* you needed:
-~~~
-sudo docker run --name clouni-server -d -p IP_address:port:50051 clouni
+~~~shell
+docker run --name clouni-server -d -p IP_address:port:50051 clouni
 ~~~

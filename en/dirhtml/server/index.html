@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Client-server model &#8212; Clouni 1.0.0 documentation</title>
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title># gRPC client-server &#8212; Clouni 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
-    <link rel="next" title="Customizing" href="../customize/" />
-    <link rel="prev" title="Usage of local CLI" href="../use/" />
+    <link rel="next" title="# Customizing" href="../customize/" />
+    <link rel="prev" title="# CLI usage" href="../use/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -70,11 +70,11 @@
             <ul class='nav navbar-nav navbar-right'>
                 
   <li>
-    <a href="../use/" title="Previous Chapter: Usage of local CLI"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Usage of local CLI</span>
+    <a href="../use/" title="Previous Chapter: # CLI usage"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; # CLI usage</span>
     </a>
   </li>
   <li>
-    <a href="../customize/" title="Next Chapter: Customizing"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Customizing &raquo;</span>
+    <a href="../customize/" title="Next Chapter: # Customizing"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet"># Customizing &raquo;</span>
     </a>
   </li>
             </ul>
@@ -87,186 +87,217 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption"><span class="caption-text">Contents:</span></p>
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../about/">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use/">Usage of local CLI</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Client-server model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customize/">Customizing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/"># About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/"># Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/"># CLI usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"># gRPC client-server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize/"># Customizing</a></li>
 </ul>
 
         </div>
       </div>
     <div class="col-md-9 content">
       
-  <div class="section" id="client-server-model">
-<span id="client-server-model"></span><h1>Client-server model<a class="headerlink" href="#client-server-model" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="usage-of-server">
-<span id="usage-of-server"></span><h2>Usage of server<a class="headerlink" href="#usage-of-server" title="Permalink to this headline">¶</a></h2>
+  <section id="grpc-client-server">
+<h1># gRPC client-server<a class="headerlink" href="#grpc-client-server" title="Permalink to this headline">¶</a></h1>
+<p>## Start server with CLI</p>
 <p>You need to implement client using specification
 located at <em>toscatranslator/api.proto</em>, or use CLI-client <em>clouni-client</em></p>
 <p>Supported clouni request options are identical to the CLI version
-except not supported <code class="docutils literal notranslate"><span class="pre">--output-file</span></code> option and <code class="docutils literal notranslate"><span class="pre">--template-file</span></code> option,
-replaced by <code class="docutils literal notranslate"><span class="pre">template_file_content</span></code></p>
-<p>Log file is <code class="docutils literal notranslate"><span class="pre">./.clouni-server.log</span></code></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni-server --help
-</pre></div>
-</div>
-<p>Output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">clouni</span><span class="o">-</span><span class="n">server</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">workers</span> <span class="o">&lt;</span><span class="n">number</span> <span class="n">of</span> <span class="n">workers</span><span class="o">&gt;</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">host</span> <span class="o">&lt;</span><span class="n">host_name</span><span class="o">/</span><span class="n">host_address</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">verbose</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">host</span><span class="o">-</span><span class="n">error</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">stop</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">foreground</span><span class="p">]</span>
-
-<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
-  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
-  <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">workers</span> <span class="o">&lt;</span><span class="n">number</span> <span class="n">of</span> <span class="n">workers</span><span class="o">&gt;</span>
-                        <span class="n">Maximum</span> <span class="n">of</span> <span class="n">working</span> <span class="n">gRPC</span> <span class="n">threads</span><span class="p">,</span> <span class="n">default</span> <span class="mi">10</span>
-  <span class="o">--</span><span class="n">host</span> <span class="o">&lt;</span><span class="n">host_name</span><span class="o">/</span><span class="n">host_address</span><span class="o">&gt;</span>
-                        <span class="n">Hosts</span> <span class="n">on</span> <span class="n">which</span> <span class="n">server</span> <span class="n">will</span> <span class="n">be</span> <span class="n">started</span><span class="p">,</span> <span class="n">may</span> <span class="n">be</span> <span class="n">more</span>
-                        <span class="n">than</span> <span class="n">one</span><span class="p">,</span> <span class="n">default</span> <span class="p">[::]</span>
-  <span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
-                        <span class="n">Port</span> <span class="n">on</span> <span class="n">which</span> <span class="n">server</span> <span class="n">will</span> <span class="n">be</span> <span class="n">started</span><span class="p">,</span> <span class="n">default</span> <span class="mi">50051</span>
-  <span class="o">--</span><span class="n">verbose</span><span class="p">,</span> <span class="o">-</span><span class="n">v</span>         <span class="n">Logger</span> <span class="n">verbosity</span><span class="p">,</span> <span class="n">default</span> <span class="o">-</span><span class="n">vvv</span>
-  <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">host</span><span class="o">-</span><span class="n">error</span>       <span class="n">If</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">start</span> <span class="n">server</span> <span class="n">on</span> <span class="n">host</span><span class="p">:</span><span class="n">port</span> <span class="ow">and</span> <span class="n">this</span> <span class="n">option</span>
-                        <span class="n">used</span><span class="p">,</span> <span class="n">warning</span> <span class="n">will</span> <span class="n">be</span> <span class="n">logged</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">critical</span> <span class="n">error</span>
-  <span class="o">--</span><span class="n">stop</span>                <span class="n">Stops</span> <span class="nb">all</span> <span class="n">working</span> <span class="n">servers</span> <span class="ow">and</span> <span class="n">exit</span>
-  <span class="o">--</span><span class="n">foreground</span>          <span class="n">Makes</span> <span class="n">server</span> <span class="n">work</span> <span class="ow">in</span> <span class="n">foreground</span>
-</pre></div>
-</div>
-<div class="section" id="starting-server">
-<span id="starting-server"></span><h3>Starting server<a class="headerlink" href="#starting-server" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni-server --max-workers <span class="m">20</span> --host <span class="m">127</span>.0.0.1 --host <span class="m">20</span>.20.20.20 --port <span class="m">50051</span> -vv --no-host-error
-</pre></div>
-</div>
-<p>Server will be started on 127.0.0.1:50051 with ‘warning’ logger verbosity level
+except not supported <cite>–output-file</cite> option and <cite>–template-file</cite> option,
+replaced by <cite>template_file_content</cite></p>
+<p>Log file is <cite>./.clouni-server.log</cite></p>
+<p>~~~shell
+clouni-server –help
+~~~
+Output:
+~~~textmate
+usage: clouni-server [-h] [–max-workers &lt;number of workers&gt;]</p>
+<blockquote>
+<div><p>[–host &lt;host_name/host_address&gt;] [–port &lt;port&gt;]
+[–verbose] [–no-host-error] [–stop] [–foreground]</p>
+</div></blockquote>
+<dl>
+<dt>optional arguments:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">--max-workers <var>&lt;number of workers&gt;</var></span></kbd></dt>
+<dd><p>Maximum of working gRPC threads, default 10</p>
+</dd>
+<dt><kbd><span class="option">--host <var>&lt;host_name/host_address&gt;</var></span></kbd></dt>
+<dd><p>Hosts on which server will be started, may be more
+than one, default [::]</p>
+</dd>
+<dt><kbd><span class="option">--port <var>&lt;port&gt;</var></span>, <span class="option">-p <var>&lt;port&gt;</var></span></kbd></dt>
+<dd><p>Port on which server will be started, default 50051</p>
+</dd>
+<dt><kbd><span class="option">--verbose</span>, <span class="option">-v</span></kbd></dt>
+<dd><p>Logger verbosity, default -vvv</p>
+</dd>
+<dt><kbd><span class="option">--no-host-error</span></kbd></dt>
+<dd><p>If unable to start server on host:port and this option
+used, warning will be logged instead of critical error</p>
+</dd>
+<dt><kbd><span class="option">--stop</span></kbd></dt>
+<dd><p>Stops all working servers and exit</p>
+</dd>
+<dt><kbd><span class="option">--foreground</span></kbd></dt>
+<dd><p>Makes server work in foreground</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>~~~
+### Starting server
+~~~shell
+clouni-server –max-workers 20 –host 127.0.0.1 –host 20.20.20.20 –port 50051 -vv –no-host-error
+~~~
+Server will be started on 127.0.0.1:50051 with ‘warning’ logger verbosity level
 Warning about unability to start server on 20.20.20.20 will be logged</p>
-<p>By default, server works in background</p>
-</div>
-</div>
-<div class="section" id="usage-of-cli-grpc-client">
-<span id="usage-of-cli-grpc-client"></span><h2>Usage of CLI gRPC client<a class="headerlink" href="#usage-of-cli-grpc-client" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni-client --help
-</pre></div>
-</div>
-<p>Output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">clouni</span><span class="o">-</span><span class="n">client</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">--</span><span class="n">template</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">name</span>
-                     <span class="n">CLUSTER_NAME</span> <span class="p">[</span><span class="o">--</span><span class="n">validate</span><span class="o">-</span><span class="n">only</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">delete</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">provider</span> <span class="n">PROVIDER</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">configuration</span><span class="o">-</span><span class="n">tool</span> <span class="n">CONFIGURATION_TOOL</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="k">async</span><span class="p">]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">extra</span> <span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="p">[</span><span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]]</span>
-                     <span class="p">[</span><span class="o">--</span><span class="n">host</span> <span class="o">&lt;</span><span class="n">host_name</span><span class="o">/</span><span class="n">host_address</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">]</span>
-
-<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
-  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
-  <span class="o">--</span><span class="n">template</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span>
-                        <span class="n">YAML</span> <span class="n">template</span> <span class="n">to</span> <span class="n">parse</span><span class="o">.</span>
-  <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">name</span> <span class="n">CLUSTER_NAME</span>
-                        <span class="n">Cluster</span> <span class="n">name</span>
-  <span class="o">--</span><span class="n">validate</span><span class="o">-</span><span class="n">only</span>       <span class="n">Only</span> <span class="n">validate</span> <span class="nb">input</span> <span class="n">template</span><span class="p">,</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">perform</span>
-                        <span class="n">translation</span><span class="o">.</span>
-  <span class="o">--</span><span class="n">delete</span>              <span class="n">Delete</span> <span class="n">cluster</span>
-  <span class="o">--</span><span class="n">provider</span> <span class="n">PROVIDER</span>   <span class="n">Cloud</span> <span class="n">provider</span> <span class="n">name</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">ansible</span> <span class="n">playbook</span> <span class="ow">in</span><span class="o">.</span>
-  <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span>
-                        <span class="n">Output</span> <span class="n">file</span>
-  <span class="o">--</span><span class="n">configuration</span><span class="o">-</span><span class="n">tool</span> <span class="n">CONFIGURATION_TOOL</span>
-                        <span class="n">Configuration</span> <span class="n">tool</span> <span class="n">which</span> <span class="n">DSL</span> <span class="n">the</span> <span class="n">template</span> <span class="n">would</span> <span class="n">be</span>
-                        <span class="n">translated</span> <span class="n">to</span><span class="o">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;ansible&quot;</span>
-  <span class="o">--</span><span class="k">async</span>               <span class="n">Provider</span> <span class="n">nodes</span> <span class="n">should</span> <span class="n">be</span> <span class="n">created</span> <span class="n">asynchronously</span>
-  <span class="o">--</span><span class="n">extra</span> <span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="p">[</span><span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]</span>
-                        <span class="n">Extra</span> <span class="n">arguments</span> <span class="k">for</span> <span class="n">configuration</span> <span class="n">tool</span> <span class="n">scripts</span>
-  <span class="o">--</span><span class="n">host</span> <span class="o">&lt;</span><span class="n">host_name</span><span class="o">/</span><span class="n">host_address</span><span class="o">&gt;</span>
-                        <span class="n">Host</span> <span class="n">of</span> <span class="n">server</span><span class="p">,</span> <span class="n">default</span> <span class="n">localhost</span>
-  <span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
-                        <span class="n">Port</span> <span class="n">of</span> <span class="n">server</span><span class="p">,</span> <span class="n">default</span> <span class="mi">50051</span>
-</pre></div>
-</div>
+<p>By default, server works in background
+## Use gRPC client with CLI
+~~~shell
+clouni-client –help
+~~~
+Output:
+~~~textmate
+usage: clouni-client [-h] –template-file &lt;filename&gt; –cluster-name</p>
+<blockquote>
+<div><p>CLUSTER_NAME [–validate-only] [–delete]
+[–provider PROVIDER] [–output-file &lt;filename&gt;]
+[–configuration-tool CONFIGURATION_TOOL] [–async]
+[–extra KEY=VALUE [KEY=VALUE …]]
+[–host &lt;host_name/host_address&gt;] [–port &lt;port&gt;]</p>
+</div></blockquote>
+<dl>
+<dt>optional arguments:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">--template-file <var>&lt;filename&gt;</var></span></kbd></dt>
+<dd><p>YAML template to parse.</p>
+</dd>
+<dt><kbd><span class="option">--cluster-name <var>CLUSTER_NAME</var></span></kbd></dt>
+<dd><p>Cluster name</p>
+</dd>
+<dt><kbd><span class="option">--validate-only</span></kbd></dt>
+<dd><p>Only validate input template, do not perform
+translation.</p>
+</dd>
+<dt><kbd><span class="option">--delete</span></kbd></dt>
+<dd><p>Delete cluster</p>
+</dd>
+<dt><kbd><span class="option">--provider <var>PROVIDER</var></span></kbd></dt>
+<dd><p>Cloud provider name to execute ansible playbook in.</p>
+</dd>
+<dt><kbd><span class="option">--output-file <var>&lt;filename&gt;</var></span></kbd></dt>
+<dd><p>Output file</p>
+</dd>
+<dt><kbd><span class="option">--configuration-tool <var>CONFIGURATION_TOOL</var></span></kbd></dt>
+<dd><p>Configuration tool which DSL the template would be
+translated to. Default value = “ansible”</p>
+</dd>
+<dt><kbd><span class="option">--async</span></kbd></dt>
+<dd><p>Provider nodes should be created asynchronously</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>–extra KEY=VALUE [KEY=VALUE …]</dt><dd><p>Extra arguments for configuration tool scripts</p>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--host <var>&lt;host_name/host_address&gt;</var></span></kbd></dt>
+<dd><p>Host of server, default localhost</p>
+</dd>
+<dt><kbd><span class="option">--port <var>&lt;port&gt;</var></span>, <span class="option">-p <var>&lt;port&gt;</var></span></kbd></dt>
+<dd><p>Port of server, default 50051</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>~~~</p>
 <p>Usage is the same as <em>clouni</em> usage, with additional <em>host</em> and <em>port</em> options</p>
-</div>
-<div class="section" id="examples-of-using-server-and-client">
-<span id="examples-of-using-server-and-client"></span><h2>Examples of using server and client<a class="headerlink" href="#examples-of-using-server-and-client" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni-server
-clouni-client --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
-</pre></div>
-</div>
-<p>Output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Server</span> <span class="n">started</span>
-<span class="o">*</span> <span class="n">Status</span> <span class="o">*</span>
-
-<span class="n">OK</span>
-
-<span class="o">*</span> <span class="n">Error</span> <span class="o">*</span>
-
-
-
-<span class="o">*</span> <span class="n">Content</span> <span class="o">*</span>
-
-<span class="o">...</span>
-</pre></div>
-</div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni-server
-clouni-client --template-file examples/tosca-server-example.yaml --cluster-name example --provider kubernetes
-</pre></div>
-</div>
-<p>Output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">Status</span> <span class="o">*</span>
-
-<span class="n">ERROR</span>
-
-<span class="o">*</span> <span class="n">Error</span> <span class="o">*</span>
-
-<span class="n">UnsupportedToscaParameterUsage</span><span class="p">:</span> <span class="n">Unable</span> <span class="n">to</span> <span class="n">use</span> <span class="n">unsupported</span> <span class="n">TOSCA</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">networks</span> <span class="ow">not</span> <span class="n">supported</span> <span class="ow">in</span> <span class="n">Kubernetes</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">threading</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">884</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_bootstrap</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_bootstrap_inner</span><span class="p">()</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">threading</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">916</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_bootstrap_inner</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">threading</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">864</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">concurrent</span><span class="o">/</span><span class="n">futures</span><span class="o">/</span><span class="n">thread</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">69</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_worker</span>
-            <span class="n">work_item</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">concurrent</span><span class="o">/</span><span class="n">futures</span><span class="o">/</span><span class="n">thread</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">56</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">grpc</span><span class="o">/</span><span class="n">_server</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">553</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_unary_response_in_pool</span>
-            <span class="n">argument</span><span class="p">,</span> <span class="n">request_deserializer</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">grpc</span><span class="o">/</span><span class="n">_server</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">435</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_call_behavior</span>
-            <span class="n">response_or_iterator</span> <span class="o">=</span> <span class="n">behavior</span><span class="p">(</span><span class="n">argument</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">grpc_clouni</span><span class="o">/</span><span class="n">clouni_server</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">58</span><span class="p">,</span> <span class="ow">in</span> <span class="n">Clouni</span>
-            <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">TranslatorServer</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">output</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">grpc_clouni</span><span class="o">/</span><span class="n">clouni_server</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">39</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
-            <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;global&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra</span><span class="p">},</span> <span class="n">a_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">toscatranslator</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">translator_to_configuration_dsl</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">48</span><span class="p">,</span> <span class="ow">in</span> <span class="n">translate</span>
-            <span class="n">tosca</span> <span class="o">=</span> <span class="n">ProviderToscaTemplate</span><span class="p">(</span><span class="n">tosca_parser_template_object</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">cluster_name</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">toscatranslator</span><span class="o">/</span><span class="n">providers</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">tosca_template</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">65</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">topology_template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">translate_to_provider</span><span class="p">()</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">toscatranslator</span><span class="o">/</span><span class="n">providers</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">tosca_template</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">384</span><span class="p">,</span> <span class="ow">in</span> <span class="n">translate_to_provider</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tosca_elements_map_to_provider</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">tosca_topology_template</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">toscatranslator</span><span class="o">/</span><span class="n">providers</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">translator_to_provider</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">830</span><span class="p">,</span> <span class="ow">in</span> <span class="n">translate</span>
-            <span class="n">tpl_structure</span> <span class="o">=</span> <span class="n">translate_node_from_tosca</span><span class="p">(</span><span class="n">restructured_mapping</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">toscatranslator</span><span class="o">/</span><span class="n">providers</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">translator_to_provider</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">483</span><span class="p">,</span> <span class="ow">in</span> <span class="n">translate_node_from_tosca</span>
-            <span class="bp">self</span><span class="o">=</span><span class="bp">self</span>
-        <span class="n">File</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">winking</span><span class="o">-</span><span class="n">maniac</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">clouni</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">clouni</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="o">/</span><span class="n">toscatranslator</span><span class="o">/</span><span class="n">providers</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">translator_to_provider</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">line</span> <span class="mi">139</span><span class="p">,</span> <span class="ow">in</span> <span class="n">restructure_value</span>
-            <span class="n">what</span><span class="o">=</span><span class="n">flat_mapping_value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">REASON</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-
-
-<span class="o">*</span> <span class="n">Content</span> <span class="o">*</span>
-
-</pre></div>
-</div>
-</div>
-<div class="section" id="dockerfile">
-<span id="dockerfile"></span><h2>Dockerfile<a class="headerlink" href="#dockerfile" title="Permalink to this headline">¶</a></h2>
+<p>## Examples of using server and client
+~~~shell
+clouni-server
+clouni-client –template-file examples/tosca-server-example.yaml –cluster-name example –provider openstack
+~~~
+Output:
+~~~text
+Server started
+* Status *</p>
+<p>OK</p>
+<ul class="simple">
+<li><p>Error *</p></li>
+<li><p>Content *</p></li>
+</ul>
+<p>…</p>
+<p>~~~</p>
+<p>~~~shell
+clouni-server
+clouni-client –template-file examples/tosca-server-example.yaml –cluster-name example –provider kubernetes
+~~~
+Output:
+~~~text
+* Status *</p>
+<p>ERROR</p>
+<ul class="simple">
+<li><p>Error *</p></li>
+</ul>
+<dl class="simple">
+<dt>UnsupportedToscaParameterUsage: Unable to use unsupported TOSCA parameter: networks not supported in Kubernetes</dt><dd><dl class="simple">
+<dt>File /usr/local/lib/python3.6/threading.py, line 884, in _bootstrap</dt><dd><p>self._bootstrap_inner()</p>
+</dd>
+<dt>File /usr/local/lib/python3.6/threading.py, line 916, in _bootstrap_inner</dt><dd><p>self.run()</p>
+</dd>
+<dt>File /usr/local/lib/python3.6/threading.py, line 864, in run</dt><dd><p>self._target(<a href="#id1"><span class="problematic" id="id2">*</span></a>self._args, <a href="#id3"><span class="problematic" id="id4">**</span></a>self._kwargs)</p>
+</dd>
+<dt>File /usr/local/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker</dt><dd><p>work_item.run()</p>
+</dd>
+<dt>File /usr/local/lib/python3.6/concurrent/futures/thread.py, line 56, in run</dt><dd><p>result = self.fn(<a href="#id5"><span class="problematic" id="id6">*</span></a>self.args, <a href="#id7"><span class="problematic" id="id8">**</span></a>self.kwargs)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool</dt><dd><p>argument, request_deserializer)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior</dt><dd><p>response_or_iterator = behavior(argument, context)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/grpc_clouni/clouni_server.py, line 58, in Clouni</dt><dd><p>response.content = TranslatorServer(args).output</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/grpc_clouni/clouni_server.py, line 39, in __init__</dt><dd><p>extra={‘global’: self.extra}, a_file=False)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/common/translator_to_configuration_dsl.py, line 48, in translate</dt><dd><p>tosca = ProviderToscaTemplate(tosca_parser_template_object, provider, cluster_name)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/tosca_template.py, line 65, in __init__</dt><dd><p>self.topology_template = self.translate_to_provider()</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/tosca_template.py, line 384, in translate_to_provider</dt><dd><p>self.tosca_elements_map_to_provider(), self.tosca_topology_template)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/translator_to_provider.py, line 830, in translate</dt><dd><p>tpl_structure = translate_node_from_tosca(restructured_mapping, element.name, self)</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/translator_to_provider.py, line 483, in translate_node_from_tosca</dt><dd><p>self=self</p>
+</dd>
+<dt>File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/translator_to_provider.py, line 139, in restructure_value</dt><dd><p>what=flat_mapping_value.get(REASON).format(self=self)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>Content *</p></li>
+</ul>
+<p>~~~</p>
+<p>## Dockerfile</p>
 <p><em>clouni-server</em> can be started as container with help of Docker.
-From <em>dockerfile</em> you can get image for clouni-server container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd $CLOUNI_HOME
-sudo docker build -t clouni - &lt; dockerfile
-</pre></div>
-</div>
-<p>Then start the server on <em>IP_address:port</em> you needed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">name</span> <span class="n">clouni</span><span class="o">-</span><span class="n">server</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="n">IP_address</span><span class="p">:</span><span class="n">port</span><span class="p">:</span><span class="mi">50051</span> <span class="n">clouni</span>
-</pre></div>
-</div>
-</div>
-</div>
+From <em>dockerfile</em> you can get image for clouni-server container:
+~~~shell
+cd $CLOUNI_HOME
+docker build -t clouni - &lt; dockerfile
+~~~
+Then start the server on <em>IP_address:port</em> you needed:
+~~~shell
+docker run –name clouni-server -d -p IP_address:port:50051 clouni
+~~~</p>
+</section>
 
 
     </div>
@@ -281,7 +312,7 @@ sudo docker build -t clouni - &lt; dockerfile
     </p>
     <p>
         &copy; Copyright 2021, ISP RAS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br/>
     </p>
   </div>
 </footer>

@@ -1,19 +1,19 @@
 # clouni.github.io
+******************
 
+## Adding new/updating old pages
 
-## Добавление новых/изменение старых страниц
-
-0. Если изменяем старый файл, goto 3
-1. В файл *$(CLOUNI_DOCS)/source/\<lang\>/index.rst* добавляем <FILENAME> в нужное место списка страниц
-2. Создаём файл *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.rst* или *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.md*
-3. Изменяем *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.rst* или *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.md*
+1. If you update old pages, go to 3 step
+1. Add <FILENAME> to the  *$(CLOUNI_DOCS)/source/\<lang\>/index.rst* in order contents
+2. Create file *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.rst* or *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.md*
+3. Update *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.rst* or *$(CLOUNI_DOCS)/source/\<lang\>/\<FILENAME\>.md*
 4.  
-    ~~~
+    ~~~shell
     cd $(CLOUNI_DOCS)/source/ru
     make dirhtml
     cd ../en
     make dirhtml
     ~~~
-5. Проверяем правильность сайта
-6. Коммитим и пушим    
-7. Вы великолепны!
+5. Check your site looks as expected
+6. Commit and push
+7. You're gorgeous!

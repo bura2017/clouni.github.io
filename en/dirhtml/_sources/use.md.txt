@@ -1,17 +1,18 @@
-
-# Usage of local CLI
+# CLI usage
+***********
 
 Execute
 ~~~shell
 clouni --help
 ~~~
 Output
-~~~
+~~~textmate
 usage: clouni [-h] --template-file <filename> --cluster-name CLUSTER_NAME
               [--validate-only] [--delete] [--provider PROVIDER]
               [--output-file <filename>]
               [--configuration-tool CONFIGURATION_TOOL] [--async]
-              [--extra KEY=VALUE [KEY=VALUE ...]]
+              [--extra KEY=VALUE [KEY=VALUE ...]] [--debug]
+              [--log-level {debug,info,warning,error,critical}]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -31,13 +32,16 @@ optional arguments:
   --async               Provider nodes should be created asynchronously
   --extra KEY=VALUE [KEY=VALUE ...]
                         Extra arguments for configuration tool scripts
+  --debug               Set debug level for tool
+  --log-level {debug,info,warning,error,critical}
+                        Set log level for tool
 ~~~
 
 ### Examples
 
 #### Check full example of Clouni possibilities for OpenStack provider
 Small example of input:
-~~~
+~~~yaml
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 topology_template:
@@ -57,13 +61,14 @@ Topology template contains several node or relationship templates to create in a
 Templates can be of different types.
 The only type supported by Clouni is `Compute` as in the example.
 Other type are planned to be supported in the future.
+
 ##### Creating
 
 ~~~shell
 clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
 ~~~
 Clouni output is Ansible playbook.
-~~~
+~~~yaml
 - hosts: localhost
   name: Create openstack cluster
   tasks:
@@ -115,11 +120,11 @@ Clouni output is Ansible playbook.
 ~~~
 ##### Deleting
 To generate playbook with the same input template, just add a --delete command
-~~~
+~~~shell
 clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
 ~~~
 Clouni output
-~~~
+~~~yaml
 - hosts: localhost
   name: Delete openstack cluster
   tasks:
@@ -134,7 +139,7 @@ Clouni output
       state: absent
 ~~~
 Ansible playbook can be executed to create or delete an instance
-~~~
+~~~shell
 ansible-playbook <playbook_name>.yaml
 ~~~
 After the execution of creating playbook, the file **id_vars_<cluster-name>.yaml** will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.
@@ -149,6 +154,6 @@ or Internet.
 
 Generated script consists of two parts:
 1. Get cloud information and choosing specific cloud parameters for meeting requirements.
-2. Create cloud resources
+1. Create cloud resources
 
 For example to create OpenStack server cloud image name and flavor must be specified.

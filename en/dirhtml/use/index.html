@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Usage of local CLI &#8212; Clouni 1.0.0 documentation</title>
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title># CLI usage &#8212; Clouni 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
-    <link rel="next" title="Client-server model" href="../server/" />
-    <link rel="prev" title="Installation" href="../install/" />
+    <link rel="next" title="# gRPC client-server" href="../server/" />
+    <link rel="prev" title="# Installation" href="../install/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -70,11 +70,11 @@
             <ul class='nav navbar-nav navbar-right'>
                 
   <li>
-    <a href="../install/" title="Previous Chapter: Installation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Installation</span>
+    <a href="../install/" title="Previous Chapter: # Installation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; # Installation</span>
     </a>
   </li>
   <li>
-    <a href="../server/" title="Next Chapter: Client-server model"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Client-server model &raquo;</span>
+    <a href="../server/" title="Next Chapter: # gRPC client-server"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet"># gRPC client-server &raquo;</span>
     </a>
   </li>
             </ul>
@@ -87,175 +87,266 @@
 <div class="container">
   <div class="row">
       <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption"><span class="caption-text">Contents:</span></p>
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../about/">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage of local CLI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server/">Client-server model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customize/">Customizing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/"># About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/"># Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"># CLI usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/"># gRPC client-server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize/"># Customizing</a></li>
 </ul>
 
         </div>
       </div>
     <div class="col-md-9 content">
       
-  <div class="section" id="usage-of-local-cli">
-<span id="usage-of-local-cli"></span><h1>Usage of local CLI<a class="headerlink" href="#usage-of-local-cli" title="Permalink to this headline">¶</a></h1>
-<p>Execute</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --help
-</pre></div>
-</div>
-<p>Output</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">clouni</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">--</span><span class="n">template</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">name</span> <span class="n">CLUSTER_NAME</span>
-              <span class="p">[</span><span class="o">--</span><span class="n">validate</span><span class="o">-</span><span class="n">only</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">delete</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">provider</span> <span class="n">PROVIDER</span><span class="p">]</span>
-              <span class="p">[</span><span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="p">]</span>
-              <span class="p">[</span><span class="o">--</span><span class="n">configuration</span><span class="o">-</span><span class="n">tool</span> <span class="n">CONFIGURATION_TOOL</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="k">async</span><span class="p">]</span>
-              <span class="p">[</span><span class="o">--</span><span class="n">extra</span> <span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="p">[</span><span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]]</span>
-
-<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
-  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
-  <span class="o">--</span><span class="n">template</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span>
-                        <span class="n">YAML</span> <span class="n">template</span> <span class="n">to</span> <span class="n">parse</span><span class="o">.</span>
-  <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">name</span> <span class="n">CLUSTER_NAME</span>
-                        <span class="n">Cluster</span> <span class="n">name</span>
-  <span class="o">--</span><span class="n">validate</span><span class="o">-</span><span class="n">only</span>       <span class="n">Only</span> <span class="n">validate</span> <span class="nb">input</span> <span class="n">template</span><span class="p">,</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">perform</span>
-                        <span class="n">translation</span><span class="o">.</span>
-  <span class="o">--</span><span class="n">delete</span>              <span class="n">Delete</span> <span class="n">cluster</span>
-  <span class="o">--</span><span class="n">provider</span> <span class="n">PROVIDER</span>   <span class="n">Cloud</span> <span class="n">provider</span> <span class="n">name</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">ansible</span> <span class="n">playbook</span> <span class="ow">in</span><span class="o">.</span>
-  <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span>
-                        <span class="n">Output</span> <span class="n">file</span>
-  <span class="o">--</span><span class="n">configuration</span><span class="o">-</span><span class="n">tool</span> <span class="n">CONFIGURATION_TOOL</span>
-                        <span class="n">Configuration</span> <span class="n">tool</span> <span class="n">which</span> <span class="n">DSL</span> <span class="n">the</span> <span class="n">template</span> <span class="n">would</span> <span class="n">be</span>
-                        <span class="n">translated</span> <span class="n">to</span><span class="o">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;ansible&quot;</span>
-  <span class="o">--</span><span class="k">async</span>               <span class="n">Provider</span> <span class="n">nodes</span> <span class="n">should</span> <span class="n">be</span> <span class="n">created</span> <span class="n">asynchronously</span>
-  <span class="o">--</span><span class="n">extra</span> <span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="p">[</span><span class="n">KEY</span><span class="o">=</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]</span>
-                        <span class="n">Extra</span> <span class="n">arguments</span> <span class="k">for</span> <span class="n">configuration</span> <span class="n">tool</span> <span class="n">scripts</span>
-</pre></div>
-</div>
-<div class="section" id="examples">
-<span id="examples"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="check-full-example-of-clouni-possibilities-for-openstack-provider">
-<span id="check-full-example-of-clouni-possibilities-for-openstack-provider"></span><h3>Check full example of Clouni possibilities for OpenStack provider<a class="headerlink" href="#check-full-example-of-clouni-possibilities-for-openstack-provider" title="Permalink to this headline">¶</a></h3>
-<p>Small example of input:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tosca_definitions_version</span><span class="p">:</span> <span class="n">tosca_simple_yaml_1_0</span>
-
-<span class="n">topology_template</span><span class="p">:</span>
-  <span class="n">node_templates</span><span class="p">:</span>
-    <span class="n">server_kube_master</span><span class="p">:</span>
-      <span class="nb">type</span><span class="p">:</span> <span class="n">tosca</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">Compute</span>
-      <span class="n">capabilities</span><span class="p">:</span>
-        <span class="n">os</span><span class="p">:</span>
-          <span class="n">properties</span><span class="p">:</span>
-            <span class="n">architecture</span><span class="p">:</span> <span class="n">x86_64</span>
-            <span class="nb">type</span><span class="p">:</span> <span class="n">ubuntu</span>
-            <span class="n">distribution</span><span class="p">:</span> <span class="n">xenial</span>
-            <span class="n">version</span><span class="p">:</span> <span class="mf">16.04</span>
-</pre></div>
-</div>
+  <section id="cli-usage">
+<h1># CLI usage<a class="headerlink" href="#cli-usage" title="Permalink to this headline">¶</a></h1>
+<p>Execute
+~~~shell
+clouni –help
+~~~
+Output
+~~~textmate
+usage: clouni [-h] –template-file &lt;filename&gt; –cluster-name CLUSTER_NAME</p>
+<blockquote>
+<div><p>[–validate-only] [–delete] [–provider PROVIDER]
+[–output-file &lt;filename&gt;]
+[–configuration-tool CONFIGURATION_TOOL] [–async]
+[–extra KEY=VALUE [KEY=VALUE …]] [–debug]
+[–log-level {debug,info,warning,error,critical}]</p>
+</div></blockquote>
+<dl>
+<dt>optional arguments:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">--template-file <var>&lt;filename&gt;</var></span></kbd></dt>
+<dd><p>YAML template to parse.</p>
+</dd>
+<dt><kbd><span class="option">--cluster-name <var>CLUSTER_NAME</var></span></kbd></dt>
+<dd><p>Cluster name</p>
+</dd>
+<dt><kbd><span class="option">--validate-only</span></kbd></dt>
+<dd><p>Only validate input template, do not perform
+translation.</p>
+</dd>
+<dt><kbd><span class="option">--delete</span></kbd></dt>
+<dd><p>Delete cluster</p>
+</dd>
+<dt><kbd><span class="option">--provider <var>PROVIDER</var></span></kbd></dt>
+<dd><p>Cloud provider name to execute ansible playbook in.</p>
+</dd>
+<dt><kbd><span class="option">--output-file <var>&lt;filename&gt;</var></span></kbd></dt>
+<dd><p>Output file</p>
+</dd>
+<dt><kbd><span class="option">--configuration-tool <var>CONFIGURATION_TOOL</var></span></kbd></dt>
+<dd><p>Configuration tool which DSL the template would be
+translated to. Default value = “ansible”</p>
+</dd>
+<dt><kbd><span class="option">--async</span></kbd></dt>
+<dd><p>Provider nodes should be created asynchronously</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>–extra KEY=VALUE [KEY=VALUE …]</dt><dd><p>Extra arguments for configuration tool scripts</p>
+</dd>
+</dl>
+<dl class="option-list">
+<dt><kbd><span class="option">--debug</span></kbd></dt>
+<dd><p>Set debug level for tool</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>–log-level {debug,info,warning,error,critical}</dt><dd><p>Set log level for tool</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>~~~</p>
+<p>### Examples</p>
+<p>#### Check full example of Clouni possibilities for OpenStack provider
+Small example of input:
+~~~yaml
+tosca_definitions_version: tosca_simple_yaml_1_0</p>
+<dl>
+<dt>topology_template:</dt><dd><dl>
+<dt>node_templates:</dt><dd><dl>
+<dt>server_kube_master:</dt><dd><p>type: tosca.nodes.Compute
+capabilities:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>os:</dt><dd><dl class="simple">
+<dt>properties:</dt><dd><p>architecture: x86_64
+type: ubuntu
+distribution: xenial
+version: 16.04</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>~~~</p>
 <p>Topology template contains several node or relationship templates to create in a cloud.
 Templates can be of different types.
-The only type supported by Clouni is <code class="docutils literal notranslate"><span class="pre">Compute</span></code> as in the example.
+The only type supported by Clouni is <cite>Compute</cite> as in the example.
 Other type are planned to be supported in the future.</p>
-<div class="section" id="creating">
-<span id="creating"></span><h4>Creating<a class="headerlink" href="#creating" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
-</pre></div>
-</div>
-<p>Clouni output is Ansible playbook.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>- hosts: localhost
-  name: Create openstack cluster
-  tasks:
-  - os_image_facts: {}
-    register: facts_result
-  - register: tmp_value
-    set_fact:
-      target_objects: &#39;{{ facts_result[&quot;ansible_facts&quot;][&quot;openstack_image&quot;] }}&#39;
-  - set_fact:
-      target_objects_8838: &#39;{{ target_objects }}&#39;
-  - set_fact:
-      input_facts: &#39;{{ target_objects_8838 }}&#39;
-  - set_fact:
-      input_args_5697:
-      - - name
-        - properties
-      - architecture: x86_64
-        distribution: xenial
-        type: ubuntu
-        version: 16.04
-  - set_fact:
-      input_args: &#39;{{ input_args_5697 }}&#39;
-  - include: contains.yaml
-  - register: tmp_value
-    set_fact:
-      name: &#39;{{ matched_object[&quot;name&quot;] }}&#39;
-  - set_fact:
-      name_1511: &#39;{{ name }}&#39;
-  - file:
-      path: &#39;{{ playbook_dir }}/id_vars_example.yaml&#39;
-      state: absent
-  - file:
-      path: &#39;{{ playbook_dir }}/id_vars_example.yaml&#39;
-      state: touch
-  - name: Create OpenStack component server
-    os_server:
-      config_drive: false
-      image: &#39;{{ name_1511 }}&#39;
-      name: server_kube_master
-    register: server_kube_master_server
-  - lineinfile:
-      line: &#39;server_kube_master_server: {{ server_kube_master_server.id }}&#39;
-      path: &#39;{{ playbook_dir }}/id_vars_example.yaml&#39;
-    when: server_kube_master_server.id is defined
-  - fail:
-      msg: Variable server_kube_master_server.id is undefined! So it will not be deleted
-    ignore_errors: true
-    when: server_kube_master_server.id is undefined
-</pre></div>
-</div>
-</div>
-<div class="section" id="deleting">
-<span id="deleting"></span><h4>Deleting<a class="headerlink" href="#deleting" title="Permalink to this headline">¶</a></h4>
-<p>To generate playbook with the same input template, just add a –delete command</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clouni</span> <span class="o">--</span><span class="n">template</span><span class="o">-</span><span class="n">file</span> <span class="n">examples</span><span class="o">/</span><span class="n">tosca</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">example</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">name</span> <span class="n">example</span> <span class="o">--</span><span class="n">provider</span> <span class="n">openstack</span> <span class="o">--</span><span class="n">delete</span>
-</pre></div>
-</div>
-<p>Clouni output</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">localhost</span>
-  <span class="n">name</span><span class="p">:</span> <span class="n">Delete</span> <span class="n">openstack</span> <span class="n">cluster</span>
-  <span class="n">tasks</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">include_vars</span><span class="p">:</span> <span class="s1">&#39;{{ playbook_dir }}/id_vars_example.yaml&#39;</span>
-  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Delete</span> <span class="n">OpenStack</span> <span class="n">component</span> <span class="n">server</span>
-    <span class="n">os_server</span><span class="p">:</span>
-      <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;{{ server_kube_master_server }}&#39;</span>
-      <span class="n">state</span><span class="p">:</span> <span class="n">absent</span>
-    <span class="n">when</span><span class="p">:</span> <span class="n">server_kube_master_server</span> <span class="ow">is</span> <span class="n">defined</span>
-  <span class="o">-</span> <span class="n">file</span><span class="p">:</span>
-      <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;{{ playbook_dir }}/id_vars_example.yaml&#39;</span>
-      <span class="n">state</span><span class="p">:</span> <span class="n">absent</span>
-</pre></div>
-</div>
-<p>Ansible playbook can be executed to create or delete an instance</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ansible</span><span class="o">-</span><span class="n">playbook</span> <span class="o">&lt;</span><span class="n">playbook_name</span><span class="o">&gt;.</span><span class="n">yaml</span>
-</pre></div>
-</div>
-<p>After the execution of creating playbook, the file <strong>id_vars_&lt;cluster-name&gt;.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
+<p>##### Creating</p>
+<p>~~~shell
+clouni –template-file examples/tosca-server-example.yaml –cluster-name example –provider openstack
+~~~
+Clouni output is Ansible playbook.
+~~~yaml
+- hosts: localhost</p>
+<blockquote>
+<div><p>name: Create openstack cluster
+tasks:
+- os_image_facts: {}</p>
+<blockquote>
+<div><p>register: facts_result</p>
+</div></blockquote>
+<ul>
+<li><p>register: tmp_value
+set_fact:</p>
+<blockquote>
+<div><p>target_objects: ‘{{ facts_result[“ansible_facts”][“openstack_image”] }}’</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>set_fact:</dt><dd><p>target_objects_8838: ‘{{ target_objects }}’</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>set_fact:</dt><dd><p>input_facts: ‘{{ target_objects_8838 }}’</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>set_fact:</dt><dd><p>input_args_5697:
+- - name</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>properties</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>architecture: x86_64
+distribution: xenial
+type: ubuntu
+version: 16.04</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>set_fact:</dt><dd><p>input_args: ‘{{ input_args_5697 }}’</p>
+</dd>
+</dl>
+</li>
+<li><p>include: contains.yaml</p></li>
+<li><p>register: tmp_value
+set_fact:</p>
+<blockquote>
+<div><p>name: ‘{{ matched_object[“name”] }}’</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>set_fact:</dt><dd><p>name_1511: ‘{{ name }}’</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>file:</dt><dd><p>path: ‘{{ playbook_dir }}/id_vars_example.yaml’
+state: absent</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>file:</dt><dd><p>path: ‘{{ playbook_dir }}/id_vars_example.yaml’
+state: touch</p>
+</dd>
+</dl>
+</li>
+<li><p>name: Create OpenStack component server
+os_server:</p>
+<blockquote>
+<div><p>config_drive: false
+image: ‘{{ name_1511 }}’
+name: server_kube_master</p>
+</div></blockquote>
+<p>register: server_kube_master_server</p>
+</li>
+<li><dl class="simple">
+<dt>lineinfile:</dt><dd><p>line: ‘server_kube_master_server: {{ server_kube_master_server.id }}’
+path: ‘{{ playbook_dir }}/id_vars_example.yaml’</p>
+</dd>
+</dl>
+<p>when: server_kube_master_server.id is defined</p>
+</li>
+<li><dl class="simple">
+<dt>fail:</dt><dd><p>msg: Variable server_kube_master_server.id is undefined! So it will not be deleted</p>
+</dd>
+</dl>
+<p>ignore_errors: true
+when: server_kube_master_server.id is undefined</p>
+</li>
+</ul>
+</div></blockquote>
+<p>~~~
+##### Deleting
+To generate playbook with the same input template, just add a –delete command
+~~~shell
+clouni –template-file examples/tosca-server-example.yaml –cluster-name example –provider openstack –delete
+~~~
+Clouni output
+~~~yaml
+- hosts: localhost</p>
+<blockquote>
+<div><p>name: Delete openstack cluster
+tasks:
+- include_vars: ‘{{ playbook_dir }}/id_vars_example.yaml’
+- name: Delete OpenStack component server</p>
+<blockquote>
+<div><dl class="simple">
+<dt>os_server:</dt><dd><p>name: ‘{{ server_kube_master_server }}’
+state: absent</p>
+</dd>
+</dl>
+<p>when: server_kube_master_server is defined</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>file:</dt><dd><p>path: ‘{{ playbook_dir }}/id_vars_example.yaml’
+state: absent</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>~~~
+Ansible playbook can be executed to create or delete an instance
+~~~shell
+ansible-playbook &lt;playbook_name&gt;.yaml
+~~~
+After the execution of creating playbook, the file <strong>id_vars_&lt;cluster-name&gt;.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
 <p><strong>ATTENTION</strong> Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
-you must download your OpenStack RC file and <code class="docutils literal notranslate"><span class="pre">source</span></code> it.
+you must download your OpenStack RC file and <cite>source</cite> it.
 After that user is able to execute Ansible playbook.</p>
 <p>During the Clouni execution it doesn’t send or receive any information from cloud
 or Internet.</p>
-<p>Generated script consists of two parts:</p>
-<ol class="simple">
-<li>Get cloud information and choosing specific cloud parameters for meeting requirements.</li>
-<li>Create cloud resources</li>
-</ol>
+<p>Generated script consists of two parts:
+1. Get cloud information and choosing specific cloud parameters for meeting requirements.
+1. Create cloud resources</p>
 <p>For example to create OpenStack server cloud image name and flavor must be specified.</p>
-</div>
-</div>
-</div>
-</div>
+</section>
 
 
     </div>
@@ -270,7 +361,7 @@ or Internet.</p>
     </p>
     <p>
         &copy; Copyright 2021, ISP RAS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br/>
     </p>
   </div>
 </footer>
