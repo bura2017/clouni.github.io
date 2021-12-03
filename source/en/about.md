@@ -1,5 +1,5 @@
 About
-*******
+-----
 
 # Clouni
 Cloud Unifier Tool for Service Orchestration
