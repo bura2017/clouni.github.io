@@ -1,5 +1,6 @@
 About
 -----
 
-[Clouni](about_clouni.md)
-[Michman](about_michman.md)
+[Clouni](about_clouni.html)
+
+[Michman](about_michman.html)
