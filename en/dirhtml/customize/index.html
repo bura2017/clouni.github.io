@@ -89,7 +89,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../server/">gRPC client-server</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Customizing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#adding-new-provider">Adding new provider</a></li>
 </ul>
 
         </div>
@@ -98,9 +97,8 @@
       
   <section id="customizing">
 <h1>Customizing<a class="headerlink" href="#customizing" title="Permalink to this headline">¶</a></h1>
-</section>
 <section id="adding-new-provider">
-<h1>Adding new provider<a class="headerlink" href="#adding-new-provider" title="Permalink to this headline">¶</a></h1>
+<h2>Adding new provider<a class="headerlink" href="#adding-new-provider" title="Permalink to this headline">¶</a></h2>
 <p>Template of project files structure:</p>
 <p><code class="docutils literal notranslate"><span class="pre">`textmate</span>
 <span class="pre">.ansible/</span>
@@ -397,6 +395,7 @@ onl Ansible tasks for filtering facts.</p>
 and define two variables <cite>matched_object</cite> and <cite>matched_objects</cite> in the end.
 Variable <cite>matched_objects</cite> contains list of all matched facts and <cite>matched_object</cite> should contain one of them.</p>
 <p><strong>ATTENTION</strong> If there are more then one matched facts the last is taken as matched fact</p>
+</section>
 </section>
 
 

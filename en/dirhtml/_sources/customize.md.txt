@@ -1,5 +1,5 @@
 Customizing
------------
+===========
 
 Adding new provider
 -------------------
