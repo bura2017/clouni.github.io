@@ -10,7 +10,7 @@ Welcome to Clouni's documentation!
    :maxdepth: 3
    :caption: Contents:
 
-   about
+   about about_clouni about_michman
    install
    use
    server
