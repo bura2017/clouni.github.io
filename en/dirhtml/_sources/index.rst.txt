@@ -9,8 +9,7 @@ Welcome to Clouni's documentation!
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
-
-      about
+      source/en/about.rst
       install
       use
       server
