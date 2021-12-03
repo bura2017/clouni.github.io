@@ -7,13 +7,12 @@ Welcome to Clouni's documentation!
 ==================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
 
    about
    install
    use
    server
-   customize
-   new_provider
+   provider
    conditions
