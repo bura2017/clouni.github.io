@@ -36,8 +36,6 @@ optional arguments:
                         Set log level for tool
 ~~~
 
-## Examples
-
 Small example of input:
 ~~~yaml
 tosca_definitions_version: tosca_simple_yaml_1_0
@@ -60,7 +58,7 @@ Templates can be of different types.
 The only type supported by Clouni is `Compute` as in the example.
 Other type are planned to be supported in the future.
 
-### Creating
+## Creating
 
 ~~~shell
 clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
@@ -116,7 +114,7 @@ Clouni output is Ansible playbook.
     ignore_errors: true
     when: server_kube_master_server.id is undefined
 ~~~
-### Deleting
+## Deleting
 To generate playbook with the same input template, just add a --delete command
 ~~~shell
 clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
