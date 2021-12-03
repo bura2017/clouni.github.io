@@ -15,3 +15,5 @@ Welcome to Clouni's documentation!
    use
    server
    customize
+   new_provider
+   conditions
