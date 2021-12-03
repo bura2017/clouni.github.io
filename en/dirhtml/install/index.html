@@ -101,61 +101,63 @@
       </div>
     <div class="col-md-9 content">
       
-  <section id="installation">
+  <section class="tex2jax_ignore mathjax_ignore" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>Clouni requires Python 3.6 to be used.</p>
 <p>To install Clouni is recommended to create virtual environment and install
-requirements in your environment.
-~~~shell
-python3.6 -m venv $VIRTUALENV_HOME/clouni
-~~~
-It’s recommended not to use <cite>$CLOUNI_HOME</cite> as your <cite>$VIRTUALENV_HOME</cite></p>
+requirements in your environment.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3.6 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+</pre></div>
+</div>
+<p>It’s recommended not to use <code class="docutils literal notranslate"><span class="pre">$CLOUNI_HOME</span></code> as your <code class="docutils literal notranslate"><span class="pre">$VIRTUALENV_HOME</span></code></p>
 <p>Install Clouni requirements in you virtual environment if you will use this virtual
 environment to execute playbooks.</p>
-<p>~~~shell
-source $VIRTUALENV_HOME/clouni/bin/activate
-cd $CLOUNI_HOME
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
+<span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
 pip install -r requirements.txt
-~~~</p>
+</pre></div>
+</div>
 <p>To use Clouni as gRPC server install requirements</p>
-<p>~~~shell
-pip install -r requirements-grpc.txt
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-grpc.txt
+</pre></div>
+</div>
 <p>To execute Clouni output Ansible playbooks install requirements</p>
-<p>~~~shell
-pip install -r requirements-ansible.txt
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-ansible.txt
+</pre></div>
+</div>
 <p>Install required OpenStack TOSCA Parser in your virtual environment. Current version
-of TOSCA Parser doesn’t have required changes. Use temporary [fork repository](<a class="reference external" href="https://github.com/bura2017/tosca-parser.git">https://github.com/bura2017/tosca-parser.git</a>).</p>
-<p>~~~shell
-cd $CLOUNI_HOME/../
-git clone <a class="reference external" href="https://github.com/bura2017/tosca-parser.git">https://github.com/bura2017/tosca-parser.git</a>
-cd tosca-parser
+of TOSCA Parser doesn’t have required changes. Use temporary <a class="reference external" href="https://github.com/bura2017/tosca-parser.git">fork repository</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>/../
+git clone https://github.com/bura2017/tosca-parser.git
+<span class="nb">cd</span> tosca-parser
 git checkout develop
 pip install -r requirements.txt
 python setup.py install
-~~~</p>
-<p>Installation command
-~~~shell
-cd $CLOUNI_HOME
+</pre></div>
+</div>
+<p>Installation command</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
 python setup.py install
-~~~</p>
-<p>## Install with Docker</p>
-<p>You can use [Docker installation](<a class="reference external" href="https://hub.docker.com/repository/docker/clouni/clouni">https://hub.docker.com/repository/docker/clouni/clouni</a>).</p>
-<p>~~~shell
-docker run –name clouni-server -d -p &lt;ip_address&gt;:&lt;port&gt;:50051 clouni/clouni:latest
-~~~</p>
-<p>Or start Clouni [gRPC server](../server/) container from source with help of Docker.
+</pre></div>
+</div>
+<section id="install-with-docker">
+<h2>Install with Docker<a class="headerlink" href="#install-with-docker" title="Permalink to this headline">¶</a></h2>
+<p>You can use <a class="reference external" href="https://hub.docker.com/repository/docker/clouni/clouni">Docker installation</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run --name clouni-server -d -p &lt;ip_address&gt;:&lt;port&gt;:50051 clouni/clouni:latest
+</pre></div>
+</div>
+<p>Or start Clouni <a class="reference internal" href="../server/"><span class="doc std std-doc">gRPC server</span></a> container from source with help of Docker.
 Container support both server and CLI version.</p>
-<p>From <em>Dockerfile</em> you can get image for clouni-server container:
-~~~shell
-cd $CLOUNI_HOME
+<p>From <em>Dockerfile</em> you can get image for clouni-server container:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
 docker build -t clouni - &lt; dockerfile
-~~~
-Then start the server on <em>IP_address:port</em> you needed:
-~~~shell
-docker run –name clouni-server -d -p IP_address:port:50051 clouni
-~~~</p>
+</pre></div>
+</div>
+<p>Then start the server on <em>IP_address:port</em> you needed:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run --name clouni-server -d -p IP_address:port:50051 clouni
+</pre></div>
+</div>
+</section>
 </section>
 
 

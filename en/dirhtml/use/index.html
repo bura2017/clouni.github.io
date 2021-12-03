@@ -101,252 +101,165 @@
       </div>
     <div class="col-md-9 content">
       
-  <section id="cli-usage">
+  <section class="tex2jax_ignore mathjax_ignore" id="cli-usage">
 <h1>CLI usage<a class="headerlink" href="#cli-usage" title="Permalink to this headline">¶</a></h1>
-<p>Execute
-~~~shell
-clouni –help
-~~~
-Output
-~~~textmate
-usage: clouni [-h] –template-file &lt;filename&gt; –cluster-name CLUSTER_NAME</p>
-<blockquote>
-<div><p>[–validate-only] [–delete] [–provider PROVIDER]
-[–output-file &lt;filename&gt;]
-[–configuration-tool CONFIGURATION_TOOL] [–async]
-[–extra KEY=VALUE [KEY=VALUE …]] [–debug]
-[–log-level {debug,info,warning,error,critical}]</p>
-</div></blockquote>
-<dl>
-<dt>optional arguments:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">--template-file <var>&lt;filename&gt;</var></span></kbd></dt>
-<dd><p>YAML template to parse.</p>
-</dd>
-<dt><kbd><span class="option">--cluster-name <var>CLUSTER_NAME</var></span></kbd></dt>
-<dd><p>Cluster name</p>
-</dd>
-<dt><kbd><span class="option">--validate-only</span></kbd></dt>
-<dd><p>Only validate input template, do not perform
-translation.</p>
-</dd>
-<dt><kbd><span class="option">--delete</span></kbd></dt>
-<dd><p>Delete cluster</p>
-</dd>
-<dt><kbd><span class="option">--provider <var>PROVIDER</var></span></kbd></dt>
-<dd><p>Cloud provider name to execute ansible playbook in.</p>
-</dd>
-<dt><kbd><span class="option">--output-file <var>&lt;filename&gt;</var></span></kbd></dt>
-<dd><p>Output file</p>
-</dd>
-<dt><kbd><span class="option">--configuration-tool <var>CONFIGURATION_TOOL</var></span></kbd></dt>
-<dd><p>Configuration tool which DSL the template would be
-translated to. Default value = “ansible”</p>
-</dd>
-<dt><kbd><span class="option">--async</span></kbd></dt>
-<dd><p>Provider nodes should be created asynchronously</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>–extra KEY=VALUE [KEY=VALUE …]</dt><dd><p>Extra arguments for configuration tool scripts</p>
-</dd>
-</dl>
-<dl class="option-list">
-<dt><kbd><span class="option">--debug</span></kbd></dt>
-<dd><p>Set debug level for tool</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>–log-level {debug,info,warning,error,critical}</dt><dd><p>Set log level for tool</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>~~~</p>
-<p>### Examples</p>
-<p>#### Check full example of Clouni possibilities for OpenStack provider
-Small example of input:
-~~~yaml
-tosca_definitions_version: tosca_simple_yaml_1_0</p>
-<dl>
-<dt>topology_template:</dt><dd><dl>
-<dt>node_templates:</dt><dd><dl>
-<dt>server_kube_master:</dt><dd><p>type: tosca.nodes.Compute
-capabilities:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>os:</dt><dd><dl class="simple">
-<dt>properties:</dt><dd><p>architecture: x86_64
-type: ubuntu
-distribution: xenial
-version: 16.04</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>~~~</p>
+<p>Execute</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --help
+</pre></div>
+</div>
+<p>Output</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: clouni [-h] --template-file &lt;filename&gt; --cluster-name CLUSTER_NAME
+              [--validate-only] [--delete] [--provider PROVIDER]
+              [--output-file &lt;filename&gt;]
+              [--configuration-tool CONFIGURATION_TOOL] [--async]
+              [--extra KEY=VALUE [KEY=VALUE ...]] [--debug]
+              [--log-level {debug,info,warning,error,critical}]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --template-file &lt;filename&gt;
+                        YAML template to parse.
+  --cluster-name CLUSTER_NAME
+                        Cluster name
+  --validate-only       Only validate input template, do not perform
+                        translation.
+  --delete              Delete cluster
+  --provider PROVIDER   Cloud provider name to execute ansible playbook in.
+  --output-file &lt;filename&gt;
+                        Output file
+  --configuration-tool CONFIGURATION_TOOL
+                        Configuration tool which DSL the template would be
+                        translated to. Default value = &quot;ansible&quot;
+  --async               Provider nodes should be created asynchronously
+  --extra KEY=VALUE [KEY=VALUE ...]
+                        Extra arguments for configuration tool scripts
+  --debug               Set debug level for tool
+  --log-level {debug,info,warning,error,critical}
+                        Set log level for tool
+</pre></div>
+</div>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<section id="check-full-example-of-clouni-possibilities-for-openstack-provider">
+<h3>Check full example of Clouni possibilities for OpenStack provider<a class="headerlink" href="#check-full-example-of-clouni-possibilities-for-openstack-provider" title="Permalink to this headline">¶</a></h3>
+<p>Small example of input:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span>
+
+<span class="nt">topology_template</span><span class="p">:</span>
+  <span class="nt">node_templates</span><span class="p">:</span>
+    <span class="nt">server_kube_master</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute</span>
+      <span class="nt">capabilities</span><span class="p">:</span>
+        <span class="nt">os</span><span class="p">:</span>
+          <span class="nt">properties</span><span class="p">:</span>
+            <span class="nt">architecture</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x86_64</span>
+            <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
+            <span class="nt">distribution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
+            <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">16.04</span>
+</pre></div>
+</div>
 <p>Topology template contains several node or relationship templates to create in a cloud.
 Templates can be of different types.
-The only type supported by Clouni is <cite>Compute</cite> as in the example.
+The only type supported by Clouni is <code class="docutils literal notranslate"><span class="pre">Compute</span></code> as in the example.
 Other type are planned to be supported in the future.</p>
-<p>##### Creating</p>
-<p>~~~shell
-clouni –template-file examples/tosca-server-example.yaml –cluster-name example –provider openstack
-~~~
-Clouni output is Ansible playbook.
-~~~yaml
-- hosts: localhost</p>
-<blockquote>
-<div><p>name: Create openstack cluster
-tasks:
-- os_image_facts: {}</p>
-<blockquote>
-<div><p>register: facts_result</p>
-</div></blockquote>
-<ul>
-<li><p>register: tmp_value
-set_fact:</p>
-<blockquote>
-<div><p>target_objects: ‘{{ facts_result[“ansible_facts”][“openstack_image”] }}’</p>
-</div></blockquote>
-</li>
-<li><dl class="simple">
-<dt>set_fact:</dt><dd><p>target_objects_8838: ‘{{ target_objects }}’</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>set_fact:</dt><dd><p>input_facts: ‘{{ target_objects_8838 }}’</p>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt>set_fact:</dt><dd><p>input_args_5697:
-- - name</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>properties</p></li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><p>architecture: x86_64
-distribution: xenial
-type: ubuntu
-version: 16.04</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>set_fact:</dt><dd><p>input_args: ‘{{ input_args_5697 }}’</p>
-</dd>
-</dl>
-</li>
-<li><p>include: contains.yaml</p></li>
-<li><p>register: tmp_value
-set_fact:</p>
-<blockquote>
-<div><p>name: ‘{{ matched_object[“name”] }}’</p>
-</div></blockquote>
-</li>
-<li><dl class="simple">
-<dt>set_fact:</dt><dd><p>name_1511: ‘{{ name }}’</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>file:</dt><dd><p>path: ‘{{ playbook_dir }}/id_vars_example.yaml’
-state: absent</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>file:</dt><dd><p>path: ‘{{ playbook_dir }}/id_vars_example.yaml’
-state: touch</p>
-</dd>
-</dl>
-</li>
-<li><p>name: Create OpenStack component server
-os_server:</p>
-<blockquote>
-<div><p>config_drive: false
-image: ‘{{ name_1511 }}’
-name: server_kube_master</p>
-</div></blockquote>
-<p>register: server_kube_master_server</p>
-</li>
-<li><dl class="simple">
-<dt>lineinfile:</dt><dd><p>line: ‘server_kube_master_server: {{ server_kube_master_server.id }}’
-path: ‘{{ playbook_dir }}/id_vars_example.yaml’</p>
-</dd>
-</dl>
-<p>when: server_kube_master_server.id is defined</p>
-</li>
-<li><dl class="simple">
-<dt>fail:</dt><dd><p>msg: Variable server_kube_master_server.id is undefined! So it will not be deleted</p>
-</dd>
-</dl>
-<p>ignore_errors: true
-when: server_kube_master_server.id is undefined</p>
-</li>
-</ul>
-</div></blockquote>
-<p>~~~
-##### Deleting
-To generate playbook with the same input template, just add a –delete command
-~~~shell
-clouni –template-file examples/tosca-server-example.yaml –cluster-name example –provider openstack –delete
-~~~
-Clouni output
-~~~yaml
-- hosts: localhost</p>
-<blockquote>
-<div><p>name: Delete openstack cluster
-tasks:
-- include_vars: ‘{{ playbook_dir }}/id_vars_example.yaml’
-- name: Delete OpenStack component server</p>
-<blockquote>
-<div><dl class="simple">
-<dt>os_server:</dt><dd><p>name: ‘{{ server_kube_master_server }}’
-state: absent</p>
-</dd>
-</dl>
-<p>when: server_kube_master_server is defined</p>
-</div></blockquote>
-<ul class="simple">
-<li><dl class="simple">
-<dt>file:</dt><dd><p>path: ‘{{ playbook_dir }}/id_vars_example.yaml’
-state: absent</p>
-</dd>
-</dl>
-</li>
-</ul>
-</div></blockquote>
-<p>~~~
-Ansible playbook can be executed to create or delete an instance
-~~~shell
-ansible-playbook &lt;playbook_name&gt;.yaml
-~~~
-After the execution of creating playbook, the file <strong>id_vars_&lt;cluster-name&gt;.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
+</section>
+<section id="creating">
+<h3>Creating<a class="headerlink" href="#creating" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
+</pre></div>
+</div>
+<p>Clouni output is Ansible playbook.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create openstack cluster</span>
+  <span class="nt">tasks</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">os_image_facts</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+    <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">facts_result</span>
+  <span class="p p-Indicator">-</span> <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tmp_value</span>
+    <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">target_objects</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">facts_result[&quot;ansible_facts&quot;][&quot;openstack_image&quot;]</span><span class="nv"> </span><span class="s">}}&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">target_objects_8838</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">target_objects</span><span class="nv"> </span><span class="s">}}&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">input_facts</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">target_objects_8838</span><span class="nv"> </span><span class="s">}}&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">input_args_5697</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">properties</span>
+      <span class="p p-Indicator">-</span> <span class="nt">architecture</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x86_64</span>
+        <span class="nt">distribution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
+        <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">16.04</span>
+  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">input_args</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">input_args_5697</span><span class="nv"> </span><span class="s">}}&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">include</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">contains.yaml</span>
+  <span class="p p-Indicator">-</span> <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tmp_value</span>
+    <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">matched_object[&quot;name&quot;]</span><span class="nv"> </span><span class="s">}}&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
+      <span class="nt">name_1511</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">}}&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
+      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
+  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
+      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">touch</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create OpenStack component server</span>
+    <span class="nt">os_server</span><span class="p">:</span>
+      <span class="nt">config_drive</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">image</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">name_1511</span><span class="nv"> </span><span class="s">}}&#39;</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master</span>
+    <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server</span>
+  <span class="p p-Indicator">-</span> <span class="nt">lineinfile</span><span class="p">:</span>
+      <span class="nt">line</span><span class="p">:</span> <span class="s">&#39;server_kube_master_server:</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">server_kube_master_server.id</span><span class="nv"> </span><span class="s">}}&#39;</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
+    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server.id is defined</span>
+  <span class="p p-Indicator">-</span> <span class="nt">fail</span><span class="p">:</span>
+      <span class="nt">msg</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Variable server_kube_master_server.id is undefined! So it will not be deleted</span>
+    <span class="nt">ignore_errors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server.id is undefined</span>
+</pre></div>
+</div>
+</section>
+<section id="deleting">
+<h3>Deleting<a class="headerlink" href="#deleting" title="Permalink to this headline">¶</a></h3>
+<p>To generate playbook with the same input template, just add a –delete command</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
+</pre></div>
+</div>
+<p>Clouni output</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete openstack cluster</span>
+  <span class="nt">tasks</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">include_vars</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component server</span>
+    <span class="nt">os_server</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">server_kube_master_server</span><span class="nv"> </span><span class="s">}}&#39;</span>
+      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
+    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server is defined</span>
+  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
+      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
+</pre></div>
+</div>
+<p>Ansible playbook can be executed to create or delete an instance</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ansible-playbook &lt;playbook_name&gt;.yaml
+</pre></div>
+</div>
+<p>After the execution of creating playbook, the file <strong>id_vars_<cluster-name>.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
 <p><strong>ATTENTION</strong> Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
-you must download your OpenStack RC file and <cite>source</cite> it.
+you must download your OpenStack RC file and <code class="docutils literal notranslate"><span class="pre">source</span></code> it.
 After that user is able to execute Ansible playbook.</p>
 <p>During the Clouni execution it doesn’t send or receive any information from cloud
 or Internet.</p>
-<p>Generated script consists of two parts:
-1. Get cloud information and choosing specific cloud parameters for meeting requirements.
-1. Create cloud resources</p>
+<p>Generated script consists of two parts:</p>
+<ol class="simple">
+<li><p>Get cloud information and choosing specific cloud parameters for meeting requirements.</p></li>
+<li><p>Create cloud resources</p></li>
+</ol>
 <p>For example to create OpenStack server cloud image name and flavor must be specified.</p>
+</section>
+</section>
 </section>
 
 

@@ -1,9 +1,8 @@
-Adding new provider
-===================
+# Adding new provider
 
 Template of project files structure:
 
-```textmate
+```text
 .ansible/
 |-- plugins
 |   |-- module_utils
@@ -19,8 +18,7 @@ toscatranslator/
 The `<provider>` means the provider's unique nic. Adding new provider
 includes several steps.
 
-Prestep: considering main components of cloud
----------------------------------------------
+## Prestep: considering main components of cloud
 
 There is set of common parameters to launch virtual machine. This
 parameters are manages in different ways by different providers and a
@@ -48,8 +46,7 @@ unified by TOSCA.
 * *scalable*: min, default, max of instances to launch
 * *volumes*: local storages
 
-Step 1: Defining main components of cloud provider
---------------------------------------------------
+## Step 1: Defining main components of cloud provider
 
 Prestep results in set of virtual cloud resources containing required
 parameters (instances, images, security groups, etc.)
@@ -89,8 +86,7 @@ relationship_types:
 Examples can be found in `toscatranslator/providers/<provider>`
 directories.
 
-Step 2: Defining mapping between tosca.nodes.Compute and main components of cloud provider
-------------------------------------------------------------------------------------------
+## Step 2: Defining mapping between tosca.nodes.Compute and main components of cloud provider
 
 This step is the declarative defining of mapping considered in Prestep
 using definitions from Step 1.
@@ -204,8 +200,7 @@ except default deriviation from Root. As it's unknown actions to resolve
 dependencies from parents.
 
 
-Step 3: Provider configuration file
------------------------------------
+## Step 3: Provider configuration file
 
 Every provider is configured with configuration file which can be one
 the following (sorted by priority):

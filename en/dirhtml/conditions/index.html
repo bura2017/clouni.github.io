@@ -96,19 +96,19 @@
       </div>
     <div class="col-md-9 content">
       
-  <section id="filter-conditions">
+  <section class="tex2jax_ignore mathjax_ignore" id="filter-conditions">
 <h1>Filter conditions<a class="headerlink" href="#filter-conditions" title="Permalink to this headline">¶</a></h1>
 <p>Conditions used in the mapping  must be implemented for every configuration tool and be located in
-<cite>toscatranslator/providers/&lt;provider&gt;/artifacts</cite> directory</p>
+<code class="docutils literal notranslate"><span class="pre">toscatranslator/providers/&lt;provider&gt;/artifacts</span></code> directory</p>
 <section id="ansible-conditions">
 <h2>Ansible conditions<a class="headerlink" href="#ansible-conditions" title="Permalink to this headline">¶</a></h2>
 <p>Here the <em>fact</em> is the key-value object, where keys are the parameters of any cloud resource
 and the value are the values of that parameters. <em>Facts</em> is the list of <em>fact</em></p>
 <p>When using Ansible configuration tool every condition artifact must have ‘.yaml’ extension and consist
 onl Ansible tasks for filtering facts.</p>
-<p>If developer implement condition artifact, he must use variables <cite>input_facts</cite>, <cite>input_args</cite> as predefined
-and define two variables <cite>matched_object</cite> and <cite>matched_objects</cite> in the end.
-Variable <cite>matched_objects</cite> contains list of all matched facts and <cite>matched_object</cite> should contain one of them.</p>
+<p>If developer implement condition artifact, he must use variables <code class="docutils literal notranslate"><span class="pre">input_facts</span></code>, <code class="docutils literal notranslate"><span class="pre">input_args</span></code> as predefined
+and define two variables <code class="docutils literal notranslate"><span class="pre">matched_object</span></code> and <code class="docutils literal notranslate"><span class="pre">matched_objects</span></code> in the end.
+Variable <code class="docutils literal notranslate"><span class="pre">matched_objects</span></code> contains list of all matched facts and <code class="docutils literal notranslate"><span class="pre">matched_object</span></code> should contain one of them.</p>
 <p><strong>ATTENTION</strong> If there are more then one matched facts the last is taken as matched fact</p>
 </section>
 </section>

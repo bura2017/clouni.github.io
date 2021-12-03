@@ -14,4 +14,5 @@ Welcome to Clouni's documentation!
    install
    use
    server
-   customize
+   provider
+   conditions

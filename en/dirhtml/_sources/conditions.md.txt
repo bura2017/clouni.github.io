@@ -1,11 +1,9 @@
-Filter conditions
-=================
+# Filter conditions
 
 Conditions used in the mapping  must be implemented for every configuration tool and be located in
 `toscatranslator/providers/<provider>/artifacts` directory
 
-Ansible conditions
-------------------
+## Ansible conditions
 
 Here the *fact* is the key-value object, where keys are the parameters of any cloud resource
 and the value are the values of that parameters. *Facts* is the list of *fact*

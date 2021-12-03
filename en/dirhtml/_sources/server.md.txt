@@ -1,5 +1,4 @@
-gRPC client-server 
-------------------
+# gRPC client-server 
 
 ## Start server with CLI
 
@@ -16,7 +15,7 @@ Log file is `./.clouni-server.log`
 clouni-server --help
 ~~~
 Output:
-~~~textmate
+~~~text
 usage: clouni-server [-h] [--max-workers <number of workers>]
                      [--host <host_name/host_address>] [--port <port>]
                      [--verbose] [--no-host-error] [--stop] [--foreground]
@@ -36,7 +35,9 @@ optional arguments:
   --stop                Stops all working servers and exit
   --foreground          Makes server work in foreground
 ~~~
-### Starting server
+
+Execute command to start server 
+
 ~~~shell
 clouni-server --max-workers 20 --host 127.0.0.1 --host 20.20.20.20 --port 50051 -vv --no-host-error
 ~~~
@@ -44,12 +45,13 @@ Server will be started on 127.0.0.1:50051 with 'warning' logger verbosity level
 Warning about unability to start server on 20.20.20.20 will be logged
 
 By default, server works in background
+
 ## Use gRPC client with CLI
 ~~~shell
 clouni-client --help
 ~~~
 Output:
-~~~textmate
+~~~text
 usage: clouni-client [-h] --template-file <filename> --cluster-name
                      CLUSTER_NAME [--validate-only] [--delete]
                      [--provider PROVIDER] [--output-file <filename>]
