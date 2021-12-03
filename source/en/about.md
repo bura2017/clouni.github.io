@@ -1,9 +1,8 @@
-*****
 About
-*****
+=====
 
 Clouni
-######
+------
 
 Cloud Unifier Tool for Service Orchestration
 
@@ -12,7 +11,7 @@ Clouni is a cloud application management tool based on OASIS standard
 
 
 Michman
-#######
+-------
 
 Use `michman-integration` branch to see Michman specific templates.
 
