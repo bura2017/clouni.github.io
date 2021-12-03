@@ -34,7 +34,6 @@ optional arguments:
 
 ## Примеры использования
 
-### Check full example of Clouni possibilities for OpenStack provider
 Небольшой пример входных данных:
 ~~~
 tosca_definitions_version: tosca_simple_yaml_1_0
