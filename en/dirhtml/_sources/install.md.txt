@@ -1,5 +1,5 @@
-# Installation
-**************
+Installation
+------------
 
 Clouni requires Python 3.6 to be used.
 

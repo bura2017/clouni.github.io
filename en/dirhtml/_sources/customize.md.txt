@@ -1,7 +1,8 @@
 Customizing
-*************
+-----------
 
-## Adding new provider
+Adding new provider
+-------------------
 
 Template of project files structure:
 

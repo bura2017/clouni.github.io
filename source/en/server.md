@@ -1,5 +1,5 @@
-# gRPC client-server 
-********************
+gRPC client-server 
+------------------
 
 ## Start server with CLI
 

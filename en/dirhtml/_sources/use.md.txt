@@ -1,5 +1,5 @@
-# CLI usage
-***********
+CLI usage
+---------
 
 Execute
 ~~~shell
