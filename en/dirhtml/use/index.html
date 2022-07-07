@@ -95,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../server/">gRPC client-server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../provider/">Adding new provider</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Filter conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a></li>
 </ul>
 
         </div>
@@ -188,7 +189,7 @@ Templates can be of different types. You can specify operations for creating/con
 <p>Clouni collects facts from the cloud you are using and generates Ansible playbooks according to a given TOSCA template, which are executed in parallel, considering the dependencies of nodes, relationships and their operations.
 The following is an example of playbook for the Openstack-based cloud. Absolutely similar behavior is available for AWS Cloud.
 It is also possible to use Clouni as a Kubernetes cluster management tool.</p>
-<p>If you only want to generate a playbook without launching it, specify the –debug key</p>
+<p>If you only want to generate a playbook without launching it, specify the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> key</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_security_group:create&#39;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
 <span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
@@ -388,7 +389,7 @@ It is also possible to use Clouni as a Kubernetes cluster management tool.</p>
 </section>
 <section id="deleting">
 <h2>Deleting<a class="headerlink" href="#deleting" title="Permalink to this headline">¶</a></h2>
-<p>To generate playbook with the same input template, just add a –delete command</p>
+<p>To generate playbook with the same input template, just add a <code class="docutils literal notranslate"><span class="pre">--delete</span></code> command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
 </pre></div>
 </div>
@@ -519,7 +520,7 @@ It is also possible to use Clouni as a Kubernetes cluster management tool.</p>
 <span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
 </pre></div>
 </div>
-<p>After the execution of creating playbooks, the file <strong>id_vars_<cluster-name>.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
+<p>After the execution of creating playbooks, the file <strong>id_vars_{cluster-name}.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
 <p><strong>ATTENTION</strong> Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
 you must download your OpenStack RC file and <code class="docutils literal notranslate"><span class="pre">source</span></code> it or use the clouds.yaml file.
@@ -532,7 +533,7 @@ or Internet.</p>
 <li><p>Create cloud resources</p></li>
 </ol>
 <p>For example to create OpenStack server cloud image name and flavor must be specified.</p>
-<p>For software configuration on virtual servers, Clouni creates a key pair using the path to the key that you specify in –public-key-path.</p>
+<p>For software configuration on virtual servers, Clouni creates a key pair using the path to the key that you specify in <code class="docutils literal notranslate"><span class="pre">--public-key-path</span></code>.</p>
 </section>
 </section>
 

@@ -96,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../server/">Сервер clouni</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../provider/">Добавление нового провайдера</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Скрипты для conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Тестирование</a></li>
 </ul>
 
         </div>
@@ -190,7 +191,7 @@
 <p>Clouni собирает факты из используемого вами облака и генерирует по заданному TOSCA шаблону Ansible-плейбуки, которые выполняются параллельно, учитывая зависимости узлов, отношений и их операций.
 Далее приведен пример плейбука для облака на базе Openstack. Абсолютно аналогичное поведение доступно для облаков AWS Cloud.
 Также есть возможность использовать Clouni как инструмент управления кластером Kubernetes.</p>
-<p>Если вы хотите только сгенерировать плейбук, не запуская его - укажите ключ –debug</p>
+<p>Если вы хотите только сгенерировать плейбук, не запуская его - укажите ключ <code class="docutils literal notranslate"><span class="pre">--debug</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_security_group:create&#39;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
 <span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
@@ -390,7 +391,7 @@
 </section>
 <section id="id3">
 <h2>Удаление<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Чтобы создать playbook для удаления того же шаблона, просто добавьте команду –delete</p>
+<p>Чтобы создать playbook для удаления того же шаблона, просто добавьте команду <code class="docutils literal notranslate"><span class="pre">--delete</span></code></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
 </pre></div>
 </div>
@@ -521,7 +522,7 @@
 <span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
 </pre></div>
 </div>
-<p>После выполнения плейбуков будет создан файл <strong>id_var_&lt;имя кластера&gt;.yaml</strong>. Этот файл содержит идентификаторы всех ресурсов. Clouni использует этот файл для удаления соответствующих облачных ресурсов.</p>
+<p>После выполнения плейбуков будет создан файл <strong>id_vars_{cluster-name}.yaml</strong>. Этот файл содержит идентификаторы всех ресурсов. Clouni использует этот файл для удаления соответствующих облачных ресурсов.</p>
 <p><strong>ВНИМАНИЕ</strong> Большинству провайдеров требуется аутентификация для использования облачных ресурсов.
 Аутентификация - это ответственность пользователей. Например, чтобы использовать OpenStack, вы должны загрузить свой RC-файл OpenStack, либо же использовать файл clouds.yaml.
 После этого вы можете пользоваться Clouni.</p>
@@ -532,7 +533,7 @@
 <li><p>Создать облачные ресурсы</p></li>
 </ol>
 <p>Например, для создания образа сервера в облачной среде OpenStack необходимо указать имя и тип образа.</p>
-<p>Для конфигурации програмнного обеспечения на виртуальных серверах Clouni создает ключевую пару используя путь к ключу, который вы укажете в –public-key-path.</p>
+<p>Для конфигурации програмнного обеспечения на виртуальных серверах Clouni создает ключевую пару используя путь к ключу, который вы укажете в <code class="docutils literal notranslate"><span class="pre">--public-key-path</span></code>.</p>
 </section>
 </section>
 

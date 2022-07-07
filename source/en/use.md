@@ -91,7 +91,7 @@ Clouni collects facts from the cloud you are using and generates Ansible playboo
 The following is an example of playbook for the Openstack-based cloud. Absolutely similar behavior is available for AWS Cloud.
 It is also possible to use Clouni as a Kubernetes cluster management tool.
 
-If you only want to generate a playbook without launching it, specify the --debug key
+If you only want to generate a playbook without launching it, specify the ```--debug``` key
 ~~~yaml
 - name: 'Create OpenStack component openstack cluster: tosca_server_example_security_group:create'
   hosts: localhost
@@ -289,7 +289,7 @@ If you only want to generate a playbook without launching it, specify the --debu
     when: tosca_server_example_floating_ip_dict is defined
 ~~~
 ## Deleting
-To generate playbook with the same input template, just add a --delete command
+To generate playbook with the same input template, just add a ```--delete``` command
 ~~~shell
 clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
 ~~~
@@ -420,7 +420,7 @@ File with playbooks for deleting cloud resources:
       path: /home/sadimer/Desktop/clouni/id_vars_example.yaml
       state: absent
 ~~~
-After the execution of creating playbooks, the file **id_vars_<cluster-name>.yaml** will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.
+After the execution of creating playbooks, the file **id_vars_{cluster-name}.yaml** will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.
 
 **ATTENTION** Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
@@ -436,4 +436,4 @@ During execution, Clouni takes only 2 steps:
 
 For example to create OpenStack server cloud image name and flavor must be specified.
 
-For software configuration on virtual servers, Clouni creates a key pair using the path to the key that you specify in --public-key-path.
+For software configuration on virtual servers, Clouni creates a key pair using the path to the key that you specify in ```--public-key-path```.
