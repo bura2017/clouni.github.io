@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Добавление нового провайдера &#8212; документация Clouni 1.0.0</title>
+    <title>Тестирование &#8212; документация Clouni 1.0.0</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
@@ -23,8 +23,6 @@
     <link rel="author" title="Об этих документах" href="../about/" />
     <link rel="index" title="Алфавитный указатель" href="../genindex/" />
     <link rel="search" title="Поиск" href="../search/" />
-    <link rel="next" title="Скрипты для conditions" href="../conditions/" />
-    <link rel="prev" title="Сервер clouni" href="../server/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -70,14 +68,6 @@
           
             <ul class='nav navbar-nav navbar-right'>
                 
-  <li>
-    <a href="../server/" title="Previous Chapter: Сервер clouni"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Сервер clouni</span>
-    </a>
-  </li>
-  <li>
-    <a href="../conditions/" title="Next Chapter: Скрипты для conditions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Скрипты для conditions &raquo;</span>
-    </a>
-  </li>
             </ul>
           
         
@@ -89,12 +79,12 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../about/">О проекте</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/">Установка</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use/">Использование в командной строке(локально)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">Использование в командной строке (локально)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../server/">Сервер clouni</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Добавление нового провайдера</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../provider/">Добавление нового провайдера</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Скрипты для conditions</a></li>
 </ul>
 
@@ -103,7 +93,29 @@
     <div class="col-md-9 content">
       
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Добавление нового провайдера<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<h1>Тестирование<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="openstack">
+<h1>Openstack<a class="headerlink" href="#openstack" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Для запуска тестов Clouni для облака на базе Openstack необходимо скачать и установить в „source“ файл RC для вашего облака Openstack, либо скачать файл clouds.yaml и поместить его в /etc/openstack.
+Далее необходимо запустить следующую команду:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m unittest testing.test_openstack <span class="k">in</span> <span class="nv">$CLOUNI_HOME</span>
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="amazon">
+<h1>Amazon<a class="headerlink" href="#amazon" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Для запуска тестов Clouni для облака на базе Amazon AWS необходимо запустить следующую команду:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m unittest testing.test_amazon <span class="k">in</span> <span class="nv">$CLOUNI_HOME</span>
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kubernetes">
+<h1>Kubernetes<a class="headerlink" href="#kubernetes" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Для запуска тестов Clouni в качестве инструмента управления кластером Kubernetes необходимо запустить следующую команду:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m unittest testing.test_kubernetes <span class="k">in</span> <span class="nv">$CLOUNI_HOME</span>
+</pre></div>
+</div>
 </section>
 
 

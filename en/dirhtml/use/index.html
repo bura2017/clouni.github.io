@@ -111,9 +111,11 @@
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: clouni [-h] --template-file &lt;filename&gt; --cluster-name CLUSTER_NAME
               [--validate-only] [--delete] [--provider PROVIDER]
               [--output-file &lt;filename&gt;]
-              [--configuration-tool CONFIGURATION_TOOL] [--async]
+              [--configuration-tool CONFIGURATION_TOOL]
               [--extra KEY=VALUE [KEY=VALUE ...]] [--debug]
               [--log-level {debug,info,warning,error,critical}]
+              [--host-parameter HOST_PARAMETER]
+              [--public-key-path PUBLIC_KEY_PATH]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -130,88 +132,257 @@ optional arguments:
   --configuration-tool CONFIGURATION_TOOL
                         Configuration tool which DSL the template would be
                         translated to. Default value = &quot;ansible&quot;
-  --async               Provider nodes should be created asynchronously
   --extra KEY=VALUE [KEY=VALUE ...]
                         Extra arguments for configuration tool scripts
   --debug               Set debug level for tool
   --log-level {debug,info,warning,error,critical}
                         Set log level for tool
+  --host-parameter HOST_PARAMETER
+                        Specify Compute property to be used as host IP for
+                        software components that hosted on the Compute. Valid
+                        values: public_address and private_address
+  --public-key-path PUBLIC_KEY_PATH
+                        Set path to public key for configuration software on
+                        cloud servers
 </pre></div>
 </div>
 <p>Small example of input:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span><span class="w"></span>
 
-<span class="nt">topology_template</span><span class="p">:</span>
-  <span class="nt">node_templates</span><span class="p">:</span>
-    <span class="nt">server_kube_master</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute</span>
-      <span class="nt">capabilities</span><span class="p">:</span>
-        <span class="nt">os</span><span class="p">:</span>
-          <span class="nt">properties</span><span class="p">:</span>
-            <span class="nt">architecture</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x86_64</span>
-            <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
-            <span class="nt">distribution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
-            <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">16.04</span>
+<span class="nt">topology_template</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">node_templates</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">tosca_server_example</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute</span><span class="w"></span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">meta</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cube_master=true&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">public_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.100.157.77</span><span class="w"></span>
+<span class="w">        </span><span class="nt">networks</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">network_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sandbox_net</span><span class="w"></span>
+<span class="w">      </span><span class="nt">capabilities</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">num_cpus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">            </span><span class="nt">disk_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10 GiB</span><span class="w"></span>
+<span class="w">            </span><span class="nt">mem_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 GiB</span><span class="w"></span>
+<span class="w">        </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span><span class="w"></span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span><span class="w"></span>
+<span class="w">            </span><span class="nt">initiator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target</span><span class="w"></span>
+<span class="w">            </span><span class="nt">ip_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span><span class="w"></span>
+<span class="w">        </span><span class="nt">os</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">architecture</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x86_64</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cirros</span><span class="w"></span>
+<span class="w">            </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4.0</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Topology template contains several node or relationship templates to create in a cloud.
-Templates can be of different types.
-The only type supported by Clouni is <code class="docutils literal notranslate"><span class="pre">Compute</span></code> as in the example.
-Other type are planned to be supported in the future.</p>
+Templates can be of different types. You can specify operations for creating/configuring/launching/deleting (etc.) cloud resources. Examples can be seen <a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.0.html">here</a> and <a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.3/TOSCA-Simple-Profile-YAML-v1.3.html">here</a>. However, it is worth noting that there is no full support for TOSCA v1.3 in Clouni.</p>
 <section id="creating">
 <h2>Creating<a class="headerlink" href="#creating" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
 </pre></div>
 </div>
-<p>Clouni output is Ansible playbook.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create openstack cluster</span>
-  <span class="nt">tasks</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">os_image_facts</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-    <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">facts_result</span>
-  <span class="p p-Indicator">-</span> <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tmp_value</span>
-    <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">target_objects</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">facts_result[&quot;ansible_facts&quot;][&quot;openstack_image&quot;]</span><span class="nv"> </span><span class="s">}}&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">target_objects_8838</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">target_objects</span><span class="nv"> </span><span class="s">}}&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">input_facts</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">target_objects_8838</span><span class="nv"> </span><span class="s">}}&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">input_args_5697</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">properties</span>
-      <span class="p p-Indicator">-</span> <span class="nt">architecture</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x86_64</span>
-        <span class="nt">distribution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
-        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu</span>
-        <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">16.04</span>
-  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">input_args</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">input_args_5697</span><span class="nv"> </span><span class="s">}}&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">include</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">contains.yaml</span>
-  <span class="p p-Indicator">-</span> <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tmp_value</span>
-    <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">name</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">matched_object[&quot;name&quot;]</span><span class="nv"> </span><span class="s">}}&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">set_fact</span><span class="p">:</span>
-      <span class="nt">name_1511</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">}}&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span>
-      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
-      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
-  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span>
-      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
-      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">touch</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create OpenStack component server</span>
-    <span class="nt">os_server</span><span class="p">:</span>
-      <span class="nt">config_drive</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-      <span class="nt">image</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">name_1511</span><span class="nv"> </span><span class="s">}}&#39;</span>
-      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master</span>
-    <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server</span>
-  <span class="p p-Indicator">-</span> <span class="nt">lineinfile</span><span class="p">:</span>
-      <span class="nt">line</span><span class="p">:</span> <span class="s">&#39;server_kube_master_server:</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">server_kube_master_server.id</span><span class="nv"> </span><span class="s">}}&#39;</span>
-      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
-    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server.id is defined</span>
-  <span class="p p-Indicator">-</span> <span class="nt">fail</span><span class="p">:</span>
-      <span class="nt">msg</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Variable server_kube_master_server.id is undefined! So it will not be deleted</span>
-    <span class="nt">ignore_errors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server.id is undefined</span>
+<p>Clouni collects facts from the cloud you are using and generates Ansible playbooks according to a given TOSCA template, which are executed in parallel, considering the dependencies of nodes, relationships and their operations.
+The following is an example of playbook for the Openstack-based cloud. Absolutely similar behavior is available for AWS Cloud.
+It is also possible to use Clouni as a Kubernetes cluster management tool.</p>
+<p>If you only want to generate a playbook without launching it, specify the –debug key</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_security_group:create&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">file</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">file</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">touch</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create OpenStack component security group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_security_group</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_security_group_list</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_list</span><span class="w"></span>
+<span class="w">        </span><span class="s">|</span><span class="nv"> </span><span class="s">default([])</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">item.id</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="nv"> </span><span class="s">]&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group.results</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv">  </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">item.id  is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_security_group_list</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">tosca_server_example_security_group_ids</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_list</span><span class="w"></span>
+<span class="w">          </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tosca_server_example_security_group_delete:</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group.id</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group.id is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_list</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">to_nice_yaml</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fail</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable tosca_server_example_security_group is undefined! So it will not</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">be deleted</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_list is undefined and tosca_server_example_security_group.id</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is undefined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_keypair:create&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create OpenStack component keypair</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_keypair</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair</span><span class="w"></span>
+<span class="w">      </span><span class="nt">public_key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.ssh/id_rsa.pub</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_keypair_list</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair_list</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default([])</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">item.id</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="nv"> </span><span class="s">]&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair.results</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv">  </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">item.id  is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_keypair_list</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">tosca_server_example_keypair_ids</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair_list</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tosca_server_example_keypair_delete:</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair.id</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair.id is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair_list</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">to_nice_yaml</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fail</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable tosca_server_example_keypair is undefined! So it will not be deleted</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_list is undefined and tosca_server_example_keypair.id</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is undefined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule:create&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create OpenStack component security group rule</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_security_group_rule</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">direction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ingress</span><span class="w"></span>
+<span class="w">      </span><span class="nt">ethertype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IPv4</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port_range_max</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">port[item</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">int]</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default(omit)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port_range_min</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">port[item</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">int]</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default(omit)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">protocol[item</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">int]</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default(omit)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">remote_ip_prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span><span class="w"></span>
+<span class="w">      </span><span class="nt">security_group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_rule</span><span class="w"></span>
+<span class="w">    </span><span class="nt">with_sequence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start=0 end={{ [protocol | length, port | length] | max - 1 }}</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">format=%d</span><span class="w"></span>
+<span class="w">    </span><span class="nt">vars</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_security_group_rule_list</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule_list</span><span class="w"></span>
+<span class="w">        </span><span class="s">|</span><span class="nv"> </span><span class="s">default([])</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">item.id</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="nv"> </span><span class="s">]&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule.results</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv">  </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">item.id  is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_security_group_rule_list</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">tosca_server_example_security_group_rule_ids</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule_list</span><span class="w"></span>
+<span class="w">          </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_rule_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tosca_server_example_security_group_rule_delete:</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule.id</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_rule.id is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule_list</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">to_nice_yaml</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_rule_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fail</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable tosca_server_example_security_group_rule is undefined! So it will</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">not be deleted</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_rule_list is undefined and tosca_server_example_security_group_rule.id</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is undefined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_server:create&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create OpenStack component server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_server</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">auto_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">      </span><span class="nt">boot_from_volume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">      </span><span class="nt">reuse_ips</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">config_drive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
+<span class="w">      </span><span class="nt">meta</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cube_master=true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example</span><span class="w"></span>
+<span class="w">      </span><span class="nt">nics</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">net-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sandbox_net</span><span class="w"></span>
+<span class="w">      </span><span class="nt">key_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair</span><span class="w"></span>
+<span class="w">      </span><span class="nt">flavor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3d7e6639-730d-4bac-aebd-60b1baa2dd70</span><span class="w"></span>
+<span class="w">      </span><span class="nt">security_groups</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group</span><span class="w"></span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cirros-0.4.0-x86_64</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">ansible_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cirros</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">host_ip</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server.server.public_v4</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_private_address</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp/clouni/example/artifacts/add_host.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_server_list</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server_list</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default([])</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">[</span><span class="nv"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">item.id</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="nv"> </span><span class="s">]&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server.results</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv">  </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">item.id  is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_server_list</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">tosca_server_example_server_ids</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server_list</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tosca_server_example_server_delete:</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">tosca_server_example_server.id</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server.id is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server_list</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">to_nice_yaml</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_list is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fail</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable tosca_server_example_server is undefined! So it will not be deleted</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_list is undefined and tosca_server_example_server.id</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is undefined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Create</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip:create&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create OpenStack component floating ip</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_floating_ip</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">floating_ip_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.100.157.77</span><span class="w"></span>
+<span class="w">      </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example</span><span class="w"></span>
+<span class="w">      </span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_found</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">ansible_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cirros</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">host_ip</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip.floating_ip.floating_ip_address</span><span class="w"></span>
+<span class="w">        </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_public_address</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp/clouni/example/artifacts/add_host.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tosca_server_example_floating_ip_dict</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">tosca_server_example_floating_ip_dict</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">floating_ip_address</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip.floating_ip.floating_ip_address</span><span class="w"></span>
+<span class="w">            </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">          </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip.floating_ip.port_details.device_id</span><span class="w"></span>
+<span class="w">            </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">          </span><span class="nt">purge</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;yes&#39;</span><span class="w"></span>
+<span class="w">          </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip is defined</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">lineinfile</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip_dict</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">to_nice_yaml</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_dict is defined</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -221,38 +392,147 @@ Other type are planned to be supported in the future.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>clouni --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack --delete
 </pre></div>
 </div>
-<p>Clouni output</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">hosts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete openstack cluster</span>
-  <span class="nt">tasks</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">include_vars</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component server</span>
-    <span class="nt">os_server</span><span class="p">:</span>
-      <span class="nt">name</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">server_kube_master_server</span><span class="nv"> </span><span class="s">}}&#39;</span>
-      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
-    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">server_kube_master_server is defined</span>
-  <span class="p p-Indicator">-</span> <span class="nt">file</span><span class="p">:</span>
-      <span class="nt">path</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">playbook_dir</span><span class="nv"> </span><span class="s">}}/id_vars_example.yaml&#39;</span>
-      <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
+<p>File with playbooks for deleting cloud resources:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Delete</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_rule:delete&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Delete</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip:delete&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component floating ip</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_floating_ip</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip_delete</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_delete is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip=&#39;{{ tosca_server_example_floating_ip_var</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component floating ip</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_floating_ip</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_ids is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip_ids</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip=&#39;{{ tosca_server_example_floating_ip_var</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component floating ip</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_floating_ip</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_floating_ip_dict</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_dict is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip=&#39;{{ tosca_server_example_floating_ip_var</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_floating_ip_var.changed</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Delete</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_server:delete&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_server</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server_delete</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_delete is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server=&#39;{{ tosca_server_example_server_var }}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_server</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_ids is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server_ids</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server=&#39;{{ tosca_server_example_server_var }}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component server</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_server</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_server_dict</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_dict is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server=&#39;{{ tosca_server_example_server_var }}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_server_var.changed</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Delete</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_security_group:delete&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component security group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_security_group</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_delete</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_delete is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group=&#39;{{ tosca_server_example_security_group_var</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component security group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_security_group</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_ids is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_ids</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group=&#39;{{ tosca_server_example_security_group_var</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component security group</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_security_group</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_security_group_dict</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_dict is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group=&#39;{{ tosca_server_example_security_group_var</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_security_group_var.changed</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Delete</span><span class="nv"> </span><span class="s">OpenStack</span><span class="nv"> </span><span class="s">component</span><span class="nv"> </span><span class="s">openstack</span><span class="nv"> </span><span class="s">cluster:</span><span class="nv"> </span><span class="s">tosca_server_example_keypair:delete&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">include_vars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component keypair</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_keypair</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair_delete</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_delete is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair=&#39;{{ tosca_server_example_keypair_var }}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component keypair</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_keypair</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_ids is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair_ids</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">flatten(levels=1)</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair=&#39;{{ tosca_server_example_keypair_var }}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_var.changed</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delete OpenStack component keypair</span><span class="w"></span>
+<span class="w">    </span><span class="nt">os_keypair</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">tosca_server_example_keypair_dict</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_dict is defined</span><span class="w"></span>
+<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_var</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">set_fact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair=&#39;{{ tosca_server_example_keypair_var }}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_server_example_keypair_var.changed</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Renew id_vars_example.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">file</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/sadimer/Desktop/clouni/id_vars_example.yaml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Ansible playbook can be executed to create or delete an instance</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ansible-playbook &lt;playbook_name&gt;.yaml
-</pre></div>
-</div>
-<p>After the execution of creating playbook, the file <strong>id_vars_<cluster-name>.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
+<p>After the execution of creating playbooks, the file <strong>id_vars_<cluster-name>.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
 <p><strong>ATTENTION</strong> Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
-you must download your OpenStack RC file and <code class="docutils literal notranslate"><span class="pre">source</span></code> it.
-After that user is able to execute Ansible playbook.</p>
+you must download your OpenStack RC file and <code class="docutils literal notranslate"><span class="pre">source</span></code> it or use the clouds.yaml file.
+After that user is able to use Clouni for creating and deleting cloud infrastructure.</p>
 <p>During the Clouni execution it doesn’t send or receive any information from cloud
 or Internet.</p>
-<p>Generated script consists of two parts:</p>
-<ol class="simple">
+<p>During execution, Clouni takes only 2 steps:</p>
+<ol class="arabic simple">
 <li><p>Get cloud information and choosing specific cloud parameters for meeting requirements.</p></li>
 <li><p>Create cloud resources</p></li>
 </ol>
 <p>For example to create OpenStack server cloud image name and flavor must be specified.</p>
+<p>For software configuration on virtual servers, Clouni creates a key pair using the path to the key that you specify in –public-key-path.</p>
 </section>
 </section>
 
@@ -269,7 +549,7 @@ or Internet.</p>
     </p>
     <p>
         &copy; Copyright 2021, ISP RAS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>
 </footer>

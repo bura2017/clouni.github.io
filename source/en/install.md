@@ -12,22 +12,20 @@ It's recommended not to use `$CLOUNI_HOME` as your `$VIRTUALENV_HOME`
 Install Clouni requirements in you virtual environment if you will use this virtual
 environment to execute playbooks.
 
+Files requirements-ansible.txt and requirements-cotea.txt required for using Clouni with Openstack and AWS based clouds since the current version of Clouni automatically deploys TOSCA templates.
+
 ~~~shell
 source $VIRTUALENV_HOME/clouni/bin/activate
 cd $CLOUNI_HOME
 pip install -r requirements.txt
+pip install -r requirements-ansible.txt
+pip install -r requirements-cotea.txt
 ~~~
 
 To use Clouni as gRPC server install requirements
 
 ~~~shell
 pip install -r requirements-grpc.txt
-~~~
-
-To execute Clouni output Ansible playbooks install requirements
-
-~~~shell
-pip install -r requirements-ansible.txt
 ~~~
 
 Install required OpenStack TOSCA Parser in your virtual environment. Current version

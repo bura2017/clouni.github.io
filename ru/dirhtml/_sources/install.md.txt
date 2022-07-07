@@ -10,11 +10,22 @@ python3.6 -m venv $VIRTUALENV_HOME/clouni
 
 Если вы планируете использовать виртуальное окружение для выполнения playbook-ов, установите зависимости Clouni.
 
+Файлы requirements-ansible.txt и requirements-cotea.txt необходимы так как текущая версия Clouni автоматически развертывает шаблоны TOSCA в облаках на базе Openstack и AWS.
+
 ~~~shell
 source $VIRTUALENV_HOME/clouni/bin/activate
 cd $CLOUNI_HOME
 pip install -r requirements.txt
+pip install -r requirements-ansible.txt
+pip install -r requirements-cotea.txt
 ~~~
+
+Для использования Clouni как gRPC сервер установите:
+
+~~~shell
+pip install -r requirements-grpc.txt
+~~~
+
 
 Для установки требуется OpenStack TOSCA Parser. Текущая версия не имеет необходимых изменений, используйте временный [fork repository](https://github.com/bura2017/tosca-parser.git).
 

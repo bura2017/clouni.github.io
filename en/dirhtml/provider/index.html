@@ -159,31 +159,31 @@ container</p></li>
 parameters (instances, images, security groups, etc.)</p>
 <p>Define main components definitions in language specified by TOSCA.</p>
 <p>The template of definition file must be:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span>
-<span class="nt">capability_types</span><span class="p">:</span>
-    <span class="nt">&lt;provider&gt;.capabilities.Root</span><span class="p">:</span>
-        <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.Root</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;...&gt;</span>
-<span class="nt">node_types</span><span class="p">:</span>
-    <span class="nt">&lt;provider&gt;.nodes.Root</span><span class="p">:</span>
-        <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Root</span>
-        <span class="nt">capabilities</span><span class="p">:</span>
-            <span class="nt">feature</span><span class="p">:</span>
-                <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.capabilities.Node</span>
-                <span class="nt">occurrences</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">1</span> <span class="p p-Indicator">]</span>
-        <span class="nt">requirements</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="nt">dependency</span><span class="p">:</span>
-                <span class="nt">capability</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.capabilities.Node</span>
-                <span class="nt">node</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.nodes.Root</span>
-                <span class="nt">relationship</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.relationships.DependsOn</span>
-                <span class="nt">occurrences</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">UNBOUNDED</span> <span class="p p-Indicator">]</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;...&gt;</span>
-<span class="nt">relationship_types</span><span class="p">:</span>
-    <span class="nt">&lt;provider&gt;.relationships.DependsOn</span><span class="p">:</span>
-        <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">This type results in ordering of initializing objects.</span>
-        <span class="nt">derived_from</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tosca.relationships.DependsOn</span>
-        <span class="nt">valid_target_types</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">&lt;provider&gt;.capabilities.Node</span> <span class="p p-Indicator">]</span>
-    <span class="l l-Scalar l-Scalar-Plain">&lt;...&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca_definitions_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca_simple_yaml_1_0</span><span class="w"></span>
+<span class="nt">capability_types</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&lt;provider&gt;.capabilities.Root</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">derived_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca.capabilities.Root</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;...&gt;</span><span class="w"></span>
+<span class="nt">node_types</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&lt;provider&gt;.nodes.Root</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">derived_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Root</span><span class="w"></span>
+<span class="w">        </span><span class="nt">capabilities</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">feature</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.capabilities.Node</span><span class="w"></span>
+<span class="w">                </span><span class="nt">occurrences</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">        </span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dependency</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="nt">capability</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.capabilities.Node</span><span class="w"></span>
+<span class="w">                </span><span class="nt">node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.nodes.Root</span><span class="w"></span>
+<span class="w">                </span><span class="nt">relationship</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;provider&gt;.relationships.DependsOn</span><span class="w"></span>
+<span class="w">                </span><span class="nt">occurrences</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">UNBOUNDED</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;...&gt;</span><span class="w"></span>
+<span class="nt">relationship_types</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&lt;provider&gt;.relationships.DependsOn</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This type results in ordering of initializing objects.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">derived_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca.relationships.DependsOn</span><span class="w"></span>
+<span class="w">        </span><span class="nt">valid_target_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">&lt;provider&gt;.capabilities.Node</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">&lt;...&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Examples can be found in <code class="docutils literal notranslate"><span class="pre">toscatranslator/providers/&lt;provider&gt;</span></code>
@@ -211,11 +211,11 @@ which to add this parameter, <code class="docutils literal notranslate"><span cl
 nodes of the same type. Be attentive and sure you don’t set existing names.
 Example:</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute.capabilities.host.properties</span>
-           <span class="l l-Scalar l-Scalar-Plain">.num_cpus</span><span class="p p-Indicator">:</span>
-<span class="nt">parameter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openstack.nodes.Server.requirements</span>
-           <span class="l l-Scalar l-Scalar-Plain">.flavor.node_filter.properties.vcpus</span>
-<span class="nt">value</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">value</span><span class="p p-Indicator">]}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute.capabilities.host.properties</span><span class="w"></span>
+<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">.num_cpus</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openstack.nodes.Server.requirements</span><span class="w"></span>
+<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">.flavor.node_filter.properties.vcpus</span><span class="w"></span>
+<span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">value</span><span class="p p-Indicator">]}</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -233,18 +233,18 @@ it can be unnecessary but must be defined any way,
 <code class="docutils literal notranslate"><span class="pre">executor</span></code> represents the configuration tool or some
 another supported executor (ex. ansible, python). Example:</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">set_fact</span>
-  <span class="nt">executor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible</span>
-  <span class="nt">parameters</span><span class="p">:</span>
-    <span class="nt">new_var</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-  <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tmp_value</span>
-<span class="c1"># example with python script</span>
-<span class="p p-Indicator">-</span> <span class="nt">source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">transform_units</span>
-  <span class="nt">parameters</span><span class="p">:</span>
-    <span class="nt">source_value</span><span class="p">:</span> <span class="s">&quot;{self[value]}&quot;</span>
-    <span class="nt">is_without_b</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-  <span class="nt">executor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-  <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set_fact</span><span class="w"></span>
+<span class="w">  </span><span class="nt">executor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span><span class="w"></span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">new_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmp_value</span><span class="w"></span>
+<span class="c1"># example with python script</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transform_units</span><span class="w"></span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">source_value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{self[value]}&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">is_without_b</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="w">  </span><span class="nt">executor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -253,32 +253,32 @@ be first chosen from existing cloud resources, <code class="docutils literal not
 of cloud resources paramters, facts need to be filtered for some value satisfying some <code class="docutils literal notranslate"><span class="pre">condition</span></code> and its
 <code class="docutils literal notranslate"><span class="pre">arguments</span></code>. Three conditions are supported: <code class="docutils literal notranslate"><span class="pre">equals</span></code>, <code class="docutils literal notranslate"><span class="pre">contains</span></code>, <code class="docutils literal notranslate"><span class="pre">ip_contains</span></code>. Example:</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute.attributes.networks.*</span>
-                <span class="l l-Scalar l-Scalar-Plain">.addresses</span><span class="p p-Indicator">:</span>
-<span class="nt">parameter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openstack.nodes.Server.requirements</span>
-                <span class="l l-Scalar l-Scalar-Plain">.nics.node_filter.properties.id</span>
-<span class="nt">value</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">network_id</span>
-  <span class="nt">condition</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ip_contains</span>
-  <span class="nt">facts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">os_subnets_facts.ansible_facts.openstack_subnets</span>
-  <span class="nt">executor</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible</span>
-  <span class="nt">arguments</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">allocation_pool_start</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">allocation_pool_end</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;{self[value]}&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute.attributes.networks.*</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">.addresses</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openstack.nodes.Server.requirements</span><span class="w"></span>
+<span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">.nics.node_filter.properties.id</span><span class="w"></span>
+<span class="nt">value</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">network_id</span><span class="w"></span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ip_contains</span><span class="w"></span>
+<span class="w">  </span><span class="nt">facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">os_subnets_facts.ansible_facts.openstack_subnets</span><span class="w"></span>
+<span class="w">  </span><span class="nt">executor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span><span class="w"></span>
+<span class="w">  </span><span class="nt">arguments</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allocation_pool_start</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allocation_pool_end</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;{self[value]}&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>ATTENTION</strong>. Please don’t use reserved keys in you mapping values,
 ex. replace ‘parameter’ key by ‘input_parameter’.</p>
 <p>The interpreter also defines a variable <code class="docutils literal notranslate"><span class="pre">self</span></code> that can be used to store
 and read some values in a key-value format. For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca.nodes.Compute.endpoint.attributes.ip_address</span><span class="p">:</span>
-  <span class="nt">parameter</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">buffer</span><span class="p p-Indicator">][</span><span class="nv">security_group_rule</span><span class="p p-Indicator">][</span><span class="nv">cidr_ip</span><span class="p p-Indicator">]}</span>
-  <span class="nt">value</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">value</span><span class="p p-Indicator">]}</span>
-<span class="nt">tosca.nodes.Compute.endpoint.properties.initiator.target</span><span class="p">:</span>
-  <span class="nt">parameter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amazon.nodes.SecurityGroup.properties.rules</span>
-  <span class="nt">value</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">buffer</span><span class="p p-Indicator">][</span><span class="nv">security_group_rule</span><span class="p p-Indicator">]}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca.nodes.Compute.endpoint.attributes.ip_address</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">buffer</span><span class="p p-Indicator">][</span><span class="nv">security_group_rule</span><span class="p p-Indicator">][</span><span class="nv">cidr_ip</span><span class="p p-Indicator">]}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">value</span><span class="p p-Indicator">]}</span><span class="w"></span>
+<span class="nt">tosca.nodes.Compute.endpoint.properties.initiator.target</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amazon.nodes.SecurityGroup.properties.rules</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">buffer</span><span class="p p-Indicator">][</span><span class="nv">security_group_rule</span><span class="p p-Indicator">]}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>There are also predefined values:</p>
@@ -299,16 +299,16 @@ dependencies from parents.</p>
 <h2>Step 3: Provider configuration file<a class="headerlink" href="#step-3-provider-configuration-file" title="Permalink to this headline">¶</a></h2>
 <p>Every provider is configured with configuration file which can be one
 the following (sorted by priority):</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;provider&gt;.cfg</span></code> in the working directory where user executes Clouni</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">toscatranslator/providers/&lt;provider&gt;/provider.cfg</span></code> in <code class="docutils literal notranslate"><span class="pre">$TOSCA_HOME</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">toscatranslator/providers/&lt;provider&gt;/&lt;provider&gt;.cfg</span></code> in <code class="docutils literal notranslate"><span class="pre">$TOSCA_HOME</span></code></p></li>
 </ol>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;provider&gt;</span></code> means provider’s nic in Clouni</p>
 <p>It has required settings for Clouni execution:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[main]</span>
-<span class="na">tosca_elements_definition_file</span> <span class="o">=</span> <span class="s">TOSCA_openstack_definition_1_0.yaml</span>
-<span class="na">tosca_elements_map_file</span> <span class="o">=</span> <span class="s">tosca_elements_map_to_openstack.yaml</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[main]</span><span class="w"></span>
+<span class="na">tosca_elements_definition_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">TOSCA_openstack_definition_1_0.yaml</span><span class="w"></span>
+<span class="na">tosca_elements_map_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">tosca_elements_map_to_openstack.yaml</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -319,9 +319,9 @@ the following (sorted by priority):</p>
 provider configuration file is located.</p>
 <p>Configuration tools are configured for every provider in provider configuration file.
 Settings must be in section names with the configuration tool. For example:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[ansible]</span>
-<span class="na">module_prefix</span> <span class="o">=</span> <span class="s">os_</span>
-<span class="na">module_description</span> <span class="o">=</span> <span class="s">Create OpenStack component</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[ansible]</span><span class="w"></span>
+<span class="na">module_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">os_</span><span class="w"></span>
+<span class="na">module_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Create OpenStack component</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -333,14 +333,14 @@ then <code class="docutils literal notranslate"><span class="pre">os_server</spa
 <p>If the mapping from Step 2 uses TOSCA <code class="docutils literal notranslate"><span class="pre">node_filter</span></code>
 (<a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/os/TOSCA-Simple-Profile-YAML-v1.0-os.html#_Toc471725299">example</a>),
 then the following section must be specified for every supported configuration tool:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[ansible.node_filter]</span>
-<span class="na">node_filter_source_prefix</span> <span class="o">=</span> <span class="s">os_</span>
-<span class="na">node_filter_source_postfix</span> <span class="o">=</span> <span class="s">_facts</span>
-<span class="na">node_filter_exceptions</span> <span class="o">=</span>
-    <span class="na">subnet</span> <span class="o">=</span> <span class="s">os_subnets_facts</span>
-<span class="na">node_filter_inner_variable</span> <span class="o">=</span>
-    <span class="na">image</span> <span class="o">=</span> <span class="s">ansible_facts,openstack_image</span>
-    <span class="na">flavor</span> <span class="o">=</span> <span class="s">ansible_facts,openstack_flavors</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[ansible.node_filter]</span><span class="w"></span>
+<span class="na">node_filter_source_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">os_</span><span class="w"></span>
+<span class="na">node_filter_source_postfix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">_facts</span><span class="w"></span>
+<span class="na">node_filter_exceptions</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">    </span><span class="na">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">os_subnets_facts</span><span class="w"></span>
+<span class="na">node_filter_inner_variable</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">    </span><span class="na">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ansible_facts,openstack_image</span><span class="w"></span>
+<span class="w">    </span><span class="na">flavor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ansible_facts,openstack_flavors</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -369,7 +369,7 @@ would be <code class="docutils literal notranslate"><span class="pre">image_fact
     </p>
     <p>
         &copy; Copyright 2021, ISP RAS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>
 </footer>

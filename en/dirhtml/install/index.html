@@ -112,17 +112,16 @@ requirements in your environment.</p>
 <p>It’s recommended not to use <code class="docutils literal notranslate"><span class="pre">$CLOUNI_HOME</span></code> as your <code class="docutils literal notranslate"><span class="pre">$VIRTUALENV_HOME</span></code></p>
 <p>Install Clouni requirements in you virtual environment if you will use this virtual
 environment to execute playbooks.</p>
+<p>Files requirements-ansible.txt and requirements-cotea.txt required for using Clouni with Openstack and AWS based clouds since the current version of Clouni automatically deploys TOSCA templates.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
 <span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
 pip install -r requirements.txt
+pip install -r requirements-ansible.txt
+pip install -r requirements-cotea.txt
 </pre></div>
 </div>
 <p>To use Clouni as gRPC server install requirements</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-grpc.txt
-</pre></div>
-</div>
-<p>To execute Clouni output Ansible playbooks install requirements</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-ansible.txt
 </pre></div>
 </div>
 <p>Install required OpenStack TOSCA Parser in your virtual environment. Current version
@@ -173,7 +172,7 @@ docker build -t clouni - &lt; dockerfile
     </p>
     <p>
         &copy; Copyright 2021, ISP RAS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>
 </footer>

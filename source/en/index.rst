@@ -16,3 +16,4 @@ Welcome to Clouni's documentation!
    server
    provider
    conditions
+   testing
