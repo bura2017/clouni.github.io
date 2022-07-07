@@ -22,6 +22,7 @@
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
+    <link rel="prev" title="Filter conditions" href="../conditions/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -67,6 +68,10 @@
           
             <ul class='nav navbar-nav navbar-right'>
                 
+  <li>
+    <a href="../conditions/" title="Previous Chapter: Filter conditions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Filter conditions</span>
+    </a>
+  </li>
             </ul>
           
         
@@ -78,13 +83,14 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about/">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../server/">gRPC client-server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../provider/">Adding new provider</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Filter conditions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a></li>
 </ul>
 
         </div>
@@ -93,28 +99,28 @@
       
   <section class="tex2jax_ignore mathjax_ignore" id="testing">
 <h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="openstack">
-<h1>Openstack<a class="headerlink" href="#openstack" title="Permalink to this headline">¶</a></h1>
+<section id="openstack">
+<h2>Openstack<a class="headerlink" href="#openstack" title="Permalink to this headline">¶</a></h2>
 <p>To run Clouni tests for an Openstack-based cloud, you need to download the RC file for your Openstack cloud and ‘source’ it, or download the clouds.yaml file and put it in /etc/openstack.
 Next, you need to run the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m unittest testing.test_openstack <span class="k">in</span> <span class="nv">$CLOUNI_HOME</span>
 </pre></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="amazon">
-<h1>Amazon<a class="headerlink" href="#amazon" title="Permalink to this headline">¶</a></h1>
+<section id="amazon">
+<h2>Amazon<a class="headerlink" href="#amazon" title="Permalink to this headline">¶</a></h2>
 <p>To run Clouni tests for an Amazon AWS-based cloud, run the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m unittest testing.test_amazon <span class="k">in</span> <span class="nv">$CLOUNI_HOME</span>
 </pre></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="kubernetes">
-<h1>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this headline">¶</a></h1>
+<section id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this headline">¶</a></h2>
 <p>To run Clouni tests as a Kubernetes cluster management tool, run the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m unittest testing.test_kubernetes <span class="k">in</span> <span class="nv">$CLOUNI_HOME</span>
 </pre></div>
 </div>
+</section>
 </section>
 
 
