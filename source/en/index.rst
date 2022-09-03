@@ -13,6 +13,7 @@ Welcome to Clouni's documentation!
    about
    install
    use
+   http-api
    server
    provider
    conditions
