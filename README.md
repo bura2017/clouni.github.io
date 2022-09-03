@@ -1,6 +1,14 @@
 # clouni.github.io
 ******************
 
+## Installation
+
+~~~shell
+pip install sphinx
+pip install jupyter-sphinx-theme
+pip install myst-parser
+~~~
+
 ## Adding new/updating old pages
 
 1. If you update old pages, go to 3 step
