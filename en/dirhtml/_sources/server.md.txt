@@ -35,6 +35,7 @@ Fill the hosts.ini file like this:
 Then run:
 ~~~shell
 pip install ansible==2.9.19
+ansible-galaxy collection install community.crypto
 ansible-playbook main.yaml -i hosts.ini
 ~~~
 

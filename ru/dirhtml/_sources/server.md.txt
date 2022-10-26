@@ -34,6 +34,7 @@ python setup.py install
 Затем выполните:
 ~~~shell
 pip install ansible==2.9.19
+ansible-galaxy collection install community.crypto
 ansible-playbook main.yaml -i hosts.ini
 ~~~
 
