@@ -23,7 +23,7 @@ from jupyter_sphinx_theme import *
 init_theme()
 
 project = 'Clouni'
-copyright = '2021, ИСП РАН'
+copyright = '2022, ИСП РАН'
 author = 'ИСП РАН'
 
 # The short X.Y version

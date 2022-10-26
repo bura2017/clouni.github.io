@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
     <link rel="next" title="Filter conditions" href="../conditions/" />
-    <link rel="prev" title="gRPC client-server" href="../server/" />
+    <link rel="prev" title="CLI usage (deprecated version)" href="../use/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -70,7 +70,7 @@
             <ul class='nav navbar-nav navbar-right'>
                 
   <li>
-    <a href="../server/" title="Previous Chapter: gRPC client-server"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; gRPC client-server</span>
+    <a href="../use/" title="Previous Chapter: CLI usage (deprecated version)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; CLI usage (deprecated version)</span>
     </a>
   </li>
   <li>
@@ -90,11 +90,13 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about/">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server/">gRPC client-server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/">Installation (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../new_use/">Using the clouni client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage (deprecated version)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Adding new provider</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Filter conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a></li>
 </ul>
 
         </div>
@@ -104,11 +106,15 @@
   <section class="tex2jax_ignore mathjax_ignore" id="adding-new-provider">
 <h1>Adding new provider<a class="headerlink" href="#adding-new-provider" title="Permalink to this headline">¶</a></h1>
 <p>Template of project files structure:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.ansible/
+<p>On client:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ansible_plugins/
 |-- plugins
 |   |-- module_utils
 |   |   |-- cloud_infra_by_tosca.py
-toscatranslator/
+</pre></div>
+</div>
+<p>In provider tool:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>provider_tool/
 |-- providers
 |   |-- &lt;provider&gt;
 |   |   |-- provider.cfg
@@ -211,11 +217,10 @@ which to add this parameter, <code class="docutils literal notranslate"><span cl
 nodes of the same type. Be attentive and sure you don’t set existing names.
 Example:</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">tosca.nodes.Compute.capabilities.host.properties</span><span class="w"></span>
-<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">.num_cpus</span><span class="p p-Indicator">:</span><span class="w"></span>
-<span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openstack.nodes.Server.requirements</span><span class="w"></span>
-<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">.flavor.node_filter.properties.vcpus</span><span class="w"></span>
-<span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">value</span><span class="p p-Indicator">]}</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca.nodes.Compute.capabilities.host.properties.num_cpus</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openstack.nodes.Server.requirements</span><span class="w"></span>
+<span class="w">             </span><span class="l l-Scalar l-Scalar-Plain">.flavor.node_filter.properties.vcpus</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">self</span><span class="p p-Indicator">[</span><span class="nv">value</span><span class="p p-Indicator">]}</span><span class="w"></span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -368,7 +373,7 @@ would be <code class="docutils literal notranslate"><span class="pre">image_fact
       
     </p>
     <p>
-        &copy; Copyright 2021, ISP RAS.<br/>
+        &copy; Copyright 2022, ISP RAS.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>

@@ -22,6 +22,7 @@
     <link rel="author" title="About these documents" href="../about/" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Testing" href="../testing/" />
     <link rel="prev" title="Adding new provider" href="../provider/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -72,6 +73,10 @@
     <a href="../provider/" title="Previous Chapter: Adding new provider"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Adding new provider</span>
     </a>
   </li>
+  <li>
+    <a href="../testing/" title="Next Chapter: Testing"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Testing &raquo;</span>
+    </a>
+  </li>
             </ul>
           
         
@@ -85,11 +90,13 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about/">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server/">gRPC client-server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/">Installation (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../new_use/">Using the clouni client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../provider/">Adding new provider</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Filter conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a></li>
 </ul>
 
         </div>
@@ -98,18 +105,17 @@
       
   <section class="tex2jax_ignore mathjax_ignore" id="filter-conditions">
 <h1>Filter conditions<a class="headerlink" href="#filter-conditions" title="Permalink to this headline">¶</a></h1>
-<p>Conditions used in the mapping  must be implemented for every configuration tool and be located in
-<code class="docutils literal notranslate"><span class="pre">toscatranslator/providers/&lt;provider&gt;/artifacts</span></code> directory</p>
+<p>Conditions used in the mapping must be implemented for every configuration tool and be located in
+<strong>{ configuration tool name }_plugins/plugins/modules</strong> in clouni client repository:</p>
 <section id="ansible-conditions">
 <h2>Ansible conditions<a class="headerlink" href="#ansible-conditions" title="Permalink to this headline">¶</a></h2>
 <p>Here the <em>fact</em> is the key-value object, where keys are the parameters of any cloud resource
-and the value are the values of that parameters. <em>Facts</em> is the list of <em>fact</em></p>
-<p>When using Ansible configuration tool every condition artifact must have ‘.yaml’ extension and consist
-onl Ansible tasks for filtering facts.</p>
-<p>If developer implement condition artifact, he must use variables <code class="docutils literal notranslate"><span class="pre">input_facts</span></code>, <code class="docutils literal notranslate"><span class="pre">input_args</span></code> as predefined
-and define two variables <code class="docutils literal notranslate"><span class="pre">matched_object</span></code> and <code class="docutils literal notranslate"><span class="pre">matched_objects</span></code> in the end.
-Variable <code class="docutils literal notranslate"><span class="pre">matched_objects</span></code> contains list of all matched facts and <code class="docutils literal notranslate"><span class="pre">matched_object</span></code> should contain one of them.</p>
-<p><strong>ATTENTION</strong> If there are more then one matched facts the last is taken as matched fact</p>
+and the value are the values of that parameters. <em>Facts</em> is the list of <em>fact</em>.</p>
+<p>When using Ansible configuration tool every condition artifact must have ‘.py’ extension and
+be a standard Ansible module exported via ANSIBLE_LIBRARY.</p>
+<p>If developer implement condition artifact, he must use variables <em>input_facts</em>, <em>input_args</em>
+as predefined. The artifact condition module should return only one matched fact or raise an error with a message that no matchable facts were found.</p>
+<p><strong>ATTENTION!</strong> If there are more then one matched facts the last is taken as matched fact.</p>
 </section>
 </section>
 
@@ -125,7 +131,7 @@ Variable <code class="docutils literal notranslate"><span class="pre">matched_ob
       
     </p>
     <p>
-        &copy; Copyright 2021, ISP RAS.<br/>
+        &copy; Copyright 2022, ISP RAS.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>

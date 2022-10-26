@@ -22,7 +22,7 @@
     <link rel="author" title="About these documents" href="#" />
     <link rel="index" title="Index" href="../genindex/" />
     <link rel="search" title="Search" href="../search/" />
-    <link rel="next" title="Installation" href="../install/" />
+    <link rel="next" title="Installation" href="../server/" />
     <link rel="prev" title="Welcome to Clouni’s documentation!" href="../" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -74,7 +74,7 @@
     </a>
   </li>
   <li>
-    <a href="../install/" title="Next Chapter: Installation"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Installation &raquo;</span>
+    <a href="../server/" title="Next Chapter: Installation"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Installation &raquo;</span>
     </a>
   </li>
             </ul>
@@ -90,11 +90,13 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server/">gRPC client-server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/">Installation (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../new_use/">Using the clouni client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../provider/">Adding new provider</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Filter conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a></li>
 </ul>
 
         </div>
@@ -105,17 +107,25 @@
 <h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
 <section id="clouni">
 <h2>Clouni<a class="headerlink" href="#clouni" title="Permalink to this headline">¶</a></h2>
-<p>Cloud Unifier Tool for Service Orchestration</p>
+<p><strong>Cloud Unifier Tool for Service Orchestration</strong></p>
 <p>Clouni is a cloud application management tool based on OASIS standard
-<a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.0.html%3E">TOSCA</a></p>
-</section>
-<section id="michman">
-<h2>Michman<a class="headerlink" href="#michman" title="Permalink to this headline">¶</a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">michman-integration</span></code> branch to see Michman specific templates.</p>
-<p>Michman is located <a class="reference external" href="https://github.com/ispras/michman">here</a></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git checkout michman-integration
-</pre></div>
-</div>
+<a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.0.html%3E">TOSCA</a>.</p>
+<p>Main features of the Clouni multicloud orchestrator:</p>
+<ol class="arabic simple">
+<li><p>Independence of the used cloud platform. Currently, Openstack, Amazon AWS and partially Kubernetes are supported, Google cloud and other platforms are planned.</p></li>
+<li><p>Fine-tuning the parameters of virtual machines, security groups, ports and networks. The ability to execute custom Ansible scripts described in TOSCA interface operations during deployment. With this, user can even configure software on virtual machines.</p></li>
+<li><p>A microservice architecture that allows to separate the processes of translating normative TOSCA templates into an internal representation, storing the state of deployed clusters, generating Ansible scripts and deployment control.</p></li>
+<li><p>Parallel deployment of independent nodes in compliance with the graph hierarchy described in TOSCA Simple Profile.</p></li>
+<li><p>TOSCA Simple Profile v1.0 and partially v1.3 are supported.</p></li>
+</ol>
+<p>Now all the components of Clouni can be found at the links:</p>
+<p><a class="reference external" href="https://github.com/sadimer/clouni_client">Client</a></p>
+<p><a class="reference external" href="https://github.com/sadimer/clouni_provider_tool">Provider tool</a></p>
+<p><a class="reference external" href="https://github.com/sadimer/clouni_configuration_tool">Configuration tool</a></p>
+<p><a class="reference external" href="https://test-files.pythonhosted.org/packages/22/24/fd0160b1dfcfcc21e6c2d2a263e60e9c46787b68c565fa8156af41cc5e92/grpccotea-0.9.3-py3-none-any.whl">Grpc cotea</a></p>
+<p><a class="reference external" href="https://github.com/DYDKA4/API_COURSE">Database API</a></p>
+<p>Unsupported, but working monolithic version:</p>
+<p><a class="reference external" href="https://github.com/ispras/clouni">Clouni (deprecated version)</a></p>
 </section>
 </section>
 
@@ -131,7 +141,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2021, ISP RAS.<br/>
+        &copy; Copyright 2022, ISP RAS.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>

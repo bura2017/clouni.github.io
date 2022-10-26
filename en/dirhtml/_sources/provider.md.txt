@@ -2,12 +2,17 @@
 
 Template of project files structure:
 
+On client:
 ```text
-.ansible/
+ansible_plugins/
 |-- plugins
 |   |-- module_utils
 |   |   |-- cloud_infra_by_tosca.py
-toscatranslator/
+```
+
+In provider tool:
+```text
+provider_tool/
 |-- providers
 |   |-- <provider>
 |   |   |-- provider.cfg
@@ -112,11 +117,10 @@ then it's one of the following cases:
   Example:
 
 ~~~yaml
-tosca.nodes.Compute.capabilities.host.properties
-           .num_cpus:
-parameter: openstack.nodes.Server.requirements
-           .flavor.node_filter.properties.vcpus
-value: {self[value]}
+tosca.nodes.Compute.capabilities.host.properties.num_cpus:
+  parameter: openstack.nodes.Server.requirements
+             .flavor.node_filter.properties.vcpus
+  value: {self[value]}
 ~~~
 * keys are `error`, `reason`: used if the parameter cannot be specified
   in TOSCA template for a certain reason.

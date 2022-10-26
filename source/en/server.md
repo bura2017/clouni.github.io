@@ -1,172 +1,122 @@
-# gRPC client-server 
+# Installation 
 
-## Start server with CLI
-
-You need to implement client using specification
-located at *toscatranslator/api.proto*, or use CLI-client *clouni-client*
-
-Supported clouni request options are identical to the CLI version
-except not supported `--output-file` option and `--template-file` option,
-replaced by `template_file_content`
-
-Log file is `./.clouni-server.log`
-
+## Clouni client
+Clouni requires Python 3.6+ to be used.
 ~~~shell
-clouni-server --help
+git clone https://github.com/sadimer/clouni_client
 ~~~
-Output:
-~~~text
-usage: clouni-server [-h] [--max-workers <number of workers>]
-                     [--host <host_name/host_address>] [--port <port>]
-                     [--verbose] [--no-host-error] [--stop] [--foreground]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --max-workers <number of workers>
-                        Maximum of working gRPC threads, default 10
-  --host <host_name/host_address>
-                        Hosts on which server will be started, may be more
-                        than one, default [::]
-  --port <port>, -p <port>
-                        Port on which server will be started, default 50051
-  --verbose, -v         Logger verbosity, default -vvv
-  --no-host-error       If unable to start server on host:port and this option
-                        used, warning will be logged instead of critical error
-  --stop                Stops all working servers and exit
-  --foreground          Makes server work in foreground
-~~~
-
-Execute command to start server 
-
+To install Clouni client is recommended to create virtual environment and install
+requirements in your environment.
 ~~~shell
-clouni-server --max-workers 20 --host 127.0.0.1 --host 20.20.20.20 --port 50051 -vv --no-host-error
+python3 -m venv $VIRTUALENV_HOME/clouni
 ~~~
-Server will be started on 127.0.0.1:50051 with 'warning' logger verbosity level
-Warning about unability to start server on 20.20.20.20 will be logged
-
-By default, server works in background
-
-## Use gRPC client with CLI
+It's recommended not to use `$CLOUNI_HOME` as your `$VIRTUALENV_HOME`.
 ~~~shell
-clouni-client --help
-~~~
-Output:
-~~~text
-usage: clouni-client [-h] --template-file <filename> --cluster-name
-                     CLUSTER_NAME [--validate-only] [--delete]
-                     [--provider PROVIDER] [--output-file <filename>]
-                     [--configuration-tool CONFIGURATION_TOOL] [--async]
-                     [--extra KEY=VALUE [KEY=VALUE ...]]
-                     [--host <host_name/host_address>] [--port <port>]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --template-file <filename>
-                        YAML template to parse.
-  --cluster-name CLUSTER_NAME
-                        Cluster name
-  --validate-only       Only validate input template, do not perform
-                        translation.
-  --delete              Delete cluster
-  --provider PROVIDER   Cloud provider name to execute ansible playbook in.
-  --output-file <filename>
-                        Output file
-  --configuration-tool CONFIGURATION_TOOL
-                        Configuration tool which DSL the template would be
-                        translated to. Default value = "ansible"
-  --async               Provider nodes should be created asynchronously
-  --extra KEY=VALUE [KEY=VALUE ...]
-                        Extra arguments for configuration tool scripts
-  --host <host_name/host_address>
-                        Host of server, default localhost
-  --port <port>, -p <port>
-                        Port of server, default 50051
-~~~
-
-Usage is the same as *clouni* usage, with additional *host* and *port* options
-
-## Examples of using server and client
-~~~shell
-clouni-server
-clouni-client --template-file examples/tosca-server-example.yaml --cluster-name example --provider openstack
-~~~
-Output:
-~~~text
-Server started
-* Status *
-
-OK
-
-* Error *
-
-
-
-* Content *
-
-...
-
-~~~
-
-
-~~~shell
-clouni-server
-clouni-client --template-file examples/tosca-server-example.yaml --cluster-name example --provider kubernetes
-~~~
-Output:
-~~~text
-* Status *
-
-ERROR
-
-* Error *
-
-UnsupportedToscaParameterUsage: Unable to use unsupported TOSCA parameter: networks not supported in Kubernetes
-		File /usr/local/lib/python3.6/threading.py, line 884, in _bootstrap
-			self._bootstrap_inner()
-		File /usr/local/lib/python3.6/threading.py, line 916, in _bootstrap_inner
-			self.run()
-		File /usr/local/lib/python3.6/threading.py, line 864, in run
-			self._target(*self._args, **self._kwargs)
-		File /usr/local/lib/python3.6/concurrent/futures/thread.py, line 69, in _worker
-			work_item.run()
-		File /usr/local/lib/python3.6/concurrent/futures/thread.py, line 56, in run
-			result = self.fn(*self.args, **self.kwargs)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/grpc/_server.py, line 553, in _unary_response_in_pool
-			argument, request_deserializer)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/grpc/_server.py, line 435, in _call_behavior
-			response_or_iterator = behavior(argument, context)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/grpc_clouni/clouni_server.py, line 58, in Clouni
-			response.content = TranslatorServer(args).output
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/grpc_clouni/clouni_server.py, line 39, in __init__
-			extra={'global': self.extra}, a_file=False)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/common/translator_to_configuration_dsl.py, line 48, in translate
-			tosca = ProviderToscaTemplate(tosca_parser_template_object, provider, cluster_name)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/tosca_template.py, line 65, in __init__
-			self.topology_template = self.translate_to_provider()
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/tosca_template.py, line 384, in translate_to_provider
-			self.tosca_elements_map_to_provider(), self.tosca_topology_template)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/translator_to_provider.py, line 830, in translate
-			tpl_structure = translate_node_from_tosca(restructured_mapping, element.name, self)
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/translator_to_provider.py, line 483, in translate_node_from_tosca
-			self=self
-		File /home/winking-maniac/test/venv/clouni/lib/python3.6/site-packages/clouni-0.0.1-py3.6.egg/toscatranslator/providers/common/translator_to_provider.py, line 139, in restructure_value
-			what=flat_mapping_value.get(REASON).format(self=self)
-
-
-* Content *
-
-
-~~~
-
-## Dockerfile
-
-*clouni-server* can be started as container with help of Docker.
-From *dockerfile* you can get image for clouni-server container:
-~~~shell
+source $VIRTUALENV_HOME/clouni/bin/activate
 cd $CLOUNI_HOME
-docker build -t clouni - < dockerfile
+pip install -r requirements.txt
+python setup.py install
 ~~~
-Then start the server on *IP_address:port* you needed:
+
+## Easy install
+After installing the client, you can install all the necessary microservices (except the storage API) by running just **one command!**
+
+**Steps for installation on remote server:**
+
+Fill the hosts.ini file like this:
+~~~ini
+[provider_tool_host]
+1.1.1.1 ansible_user=ubuntu
+[configuration_tool_host]
+2.2.2.2 ansible_user=ubuntu
+[grpc_cotea_host]
+3.3.3.3 ansible_user=ubuntu
+~~~
+Then run:
 ~~~shell
-docker run --name clouni-server -d -p IP_address:port:50051 clouni
+pip install ansible==2.9.19
+ansible-playbook main.yaml -i hosts.ini
 ~~~
+
+**For local deployment:**
+
+Replace addresses to 127.0.0.1 or localhost in hosts.ini
+
+## Clouni provider tool
+Clouni provider tool requires Python 3.6 to be used.
+
+To install Clouni provider tool is recommended to create virtual environment and install
+requirements in your environment.
+
+The user can install the services manually.
+To do this, run the following commands on the Clouni provider tool server.
+~~~shell
+git clone https://github.com/bura2017/tosca-parser.git
+git clone https://github.com/sadimer/clouni_provider_tool
+python3.6 -m venv $VIRTUALENV_HOME/clouni
+source $VIRTUALENV_HOME/clouni/bin/activate
+cd tosca-parser
+git checkout develop
+pip install -r requirements.txt
+python setup.py install
+cd $CLOUNI_PROVIDER_TOOL_HOME
+pip install -r requirements.txt
+python setup.py install
+~~~
+Now you can start the server:
+~~~shell
+clouni-provider-tool --host 0.0.0.0 -p 5000
+~~~
+## Clouni configuration tool
+Clouni configuration tool requires Python 3.6 to be used.
+
+To install Clouni configuration tool is recommended to create virtual environment and install
+requirements in your environment.
+
+The user can install the services manually.
+To do this, run the following commands on the Clouni configuration tool server.
+~~~shell
+git clone https://github.com/bura2017/tosca-parser.git
+git clone https://github.com/sadimer/clouni_configuration_tool
+python3.6 -m venv $VIRTUALENV_HOME/clouni
+source $VIRTUALENV_HOME/clouni/bin/activate
+cd tosca-parser
+git checkout develop
+pip install -r requirements.txt
+python setup.py install
+cd $CLOUNI_CONFIGURATION_TOOL_HOME
+pip install -r requirements.txt
+python setup.py install
+~~~
+Now you can start the server:
+~~~shell
+clouni-configuration-tool --host 0.0.0.0 -p 5000
+~~~
+## Grpc cotea
+The user can install the services manually.
+Grpc-cotea requires Python 3.8 to be used.
+~~~shell
+python3.8 -m venv $VIRTUALENV_HOME/clouni
+source $VIRTUALENV_HOME/clouni/bin/activate
+pip install grpcio==1.37.1
+pip install grpcio-tools==1.37.1
+pip install -i https://test.pypi.org/simple/ grpc-cotea==0.9.5
+pip install ansible==2.9.19
+pip install openstacksdk==0.46.1
+pip install boto3 botocore urllib3 bs4
+~~~
+Now you can start the server:
+~~~shell
+nohup grpc-cotea --host { please insert here host ip address } -p 5000 &
+~~~
+Create directories for additional modules and artifacts (custom Ansible scripts):
+~~~shell
+mkdir -p /tmp/clouni/ansible
+mkdir -p /tmp/clouni/artifacts
+~~~
+**Don't forget about authentication!** Most of providers require authentication for using there resources.
+Authentication is users responsibility. For example, to use OpenStack
+you must download your OpenStack RC file and *source* it or use the clouds.yaml file on the server where grpc-cotea is installed.
+
+## Database API
+The installation guide is located in [README.md](https://github.com/DYDKA4/API_COURSE).

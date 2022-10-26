@@ -23,7 +23,7 @@
     <link rel="author" title="Об этих документах" href="#" />
     <link rel="index" title="Алфавитный указатель" href="../genindex/" />
     <link rel="search" title="Поиск" href="../search/" />
-    <link rel="next" title="Установка" href="../install/" />
+    <link rel="next" title="Установка" href="../server/" />
     <link rel="prev" title="Welcome to Clouni’s documentation!" href="../" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -75,7 +75,7 @@
     </a>
   </li>
   <li>
-    <a href="../install/" title="Next Chapter: Установка"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Установка &raquo;</span>
+    <a href="../server/" title="Next Chapter: Установка"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Установка &raquo;</span>
     </a>
   </li>
             </ul>
@@ -91,11 +91,12 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">О проекте</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/">Установка</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use/">Использование в командной строке(локально)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../server/">Сервер clouni</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../provider/">Добавление нового провайдера</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/">Установка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/">Установка (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../new_use/">Использование клиента clouni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">Использование локально в командной строке (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Скрипты для conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Тестирование</a></li>
 </ul>
 
         </div>
@@ -106,16 +107,25 @@
 <h1>О проекте<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
 <section id="clouni">
 <h2>Clouni<a class="headerlink" href="#clouni" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Cloud Unifier Tool for Service Orchestration</p>
+<p><strong>Cloud Unifier Tool for Service Orchestration</strong></p>
 <p>Clouni - это инструмент управдния облачными приложениями, основанный на стандарте OASIS
-<a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.0.html">TOSCA</a></p>
-</section>
-<section id="michman">
-<h2>Michman<a class="headerlink" href="#michman" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Используйте ветку <code class="docutils literal notranslate"><span class="pre">michman-integration</span></code> для просмотра шаблонов спецификаций Michman.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git checkout michman-integration
-</pre></div>
-</div>
+<a class="reference external" href="http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.0.html">TOSCA</a>.</p>
+<p>Основные характеристики мультиоблачного оркестратора Clouni:</p>
+<ol class="arabic simple">
+<li><p>Отсутствие зависимости от используемой облачной платформы. Сейчас поддерживается Openstack, Amazon AWS и частично Kubernetes, в планах - Google cloud и другие платформы.</p></li>
+<li><p>Тонкая настройка параметров виртуальных машин, групп безопасности, портов и сетей. Возможность выполнения в ходе развертывания пользовательских Ansible сценариев описанных в TOSCA interface operations, в том числе для настройки ПО на виртуальных машинах.</p></li>
+<li><p>Микросервисная архитектура, позволяющая разделить процессы трансляции нормативных TOSCA шаблонов во внутреннее представление, хранения состояния разворачиваемых кластеров, генерации Ansible сценариев и контроля их выполнения.</p></li>
+<li><p>Параллельное развертывание независимых узлов с соблюдением графовой иерархии описанной в TOSCA Simple Profile.</p></li>
+<li><p>Поддержка TOSCA Simple Profile v1.0 и частично v1.3.</p></li>
+</ol>
+<p>Сейчас все компоненты Clouni можно найти по ссылкам:</p>
+<p><a class="reference external" href="https://github.com/sadimer/clouni_client">Клиент</a></p>
+<p><a class="reference external" href="https://github.com/sadimer/clouni_provider_tool">Provider tool</a></p>
+<p><a class="reference external" href="https://github.com/sadimer/clouni_configuration_tool">Configuration tool</a></p>
+<p><a class="reference external" href="https://test-files.pythonhosted.org/packages/22/24/fd0160b1dfcfcc21e6c2d2a263e60e9c46787b68c565fa8156af41cc5e92/grpccotea-0.9.3-py3-none-any.whl">Grpc cotea</a></p>
+<p><a class="reference external" href="https://github.com/DYDKA4/API_COURSE">Database API</a></p>
+<p>Неподдерживаемая, но рабочая монолитная версия:</p>
+<p><a class="reference external" href="https://github.com/ispras/clouni">Clouni (deprecated version)</a></p>
 </section>
 </section>
 
@@ -131,7 +141,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2021, ИСП РАН.<br/>
+        &copy; Copyright 2022, ИСП РАН.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>

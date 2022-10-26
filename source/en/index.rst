@@ -11,9 +11,10 @@ Welcome to Clouni's documentation!
    :caption: Contents:
 
    about
-   install
-   use
    server
+   install
+   new_use
+   use
    provider
    conditions
    testing

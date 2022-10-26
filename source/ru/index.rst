@@ -11,9 +11,9 @@ Welcome to Clouni's documentation!
    :caption: Содержание:
 
    about
-   install
-   use
    server
-   provider
+   install
+   new_use
+   use
    conditions
    testing

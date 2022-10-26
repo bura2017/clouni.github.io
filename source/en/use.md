@@ -1,4 +1,4 @@
-# CLI usage
+# CLI usage (deprecated version)
 
 Execute
 ~~~shell
@@ -91,7 +91,7 @@ Clouni collects facts from the cloud you are using and generates Ansible playboo
 The following is an example of playbook for the Openstack-based cloud. Absolutely similar behavior is available for AWS Cloud.
 It is also possible to use Clouni as a Kubernetes cluster management tool.
 
-If you only want to generate a playbook without launching it, specify the ```--debug``` key
+If you only want to generate a playbook without launching it, specify the ```--debug``` key.
 ~~~yaml
 - name: 'Create OpenStack component openstack cluster: tosca_server_example_security_group:create'
   hosts: localhost
