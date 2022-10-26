@@ -217,10 +217,24 @@ mkdir -p /tmp/clouni/artifacts
 </div>
 <p><strong>Не забывайте об аутентификации!</strong> Большинству провайдеров требуется аутентификация для использования облачных ресурсов.
 Аутентификация - это ответственность пользователей. Например, чтобы использовать OpenStack, вы должны загрузить свой RC-файл OpenStack, либо же использовать файл clouds.yaml на сервере где запущена grpc-cotea.</p>
+<p>Для конфигурации програмнного обеспечения на виртуальных серверах Clouni создает ключевую пару используя путь к публичному ключу, который вы укажете в <code class="docutils literal notranslate"><span class="pre">--public-key-path</span></code>. Важно что этот ключ должен находиться на сервере где запущена grpc-cotea.
+Для его генерации можно использовать команду:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ssh-keygen
+</pre></div>
+</div>
 </section>
 <section id="database-api">
 <h2>Database API<a class="headerlink" href="#database-api" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Гайд по установке находится в README.md <a class="reference external" href="https://github.com/DYDKA4/API_COURSE">здесь</a>.</p>
+</section>
+<section id="logs">
+<h2>Logs<a class="headerlink" href="#logs" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Логи каждого из микросервисов находятся здесь:</p>
+<ol class="arabic simple">
+<li><p>provider tool - <strong>$HOME/.clouni-provider-tool.log</strong></p></li>
+<li><p>configuration tool - <strong>$HOME/.clouni-configuration-tool.log</strong></p></li>
+<li><p>grpc-cotea - <strong>$HOME/cotea.log</strong></p></li>
+</ol>
 </section>
 </section>
 

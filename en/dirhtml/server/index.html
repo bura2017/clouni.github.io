@@ -221,10 +221,24 @@ mkdir -p /tmp/clouni/artifacts
 <p><strong>Don’t forget about authentication!</strong> Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
 you must download your OpenStack RC file and <em>source</em> it or use the clouds.yaml file on the server where grpc-cotea is installed.</p>
+<p>For software configuration on virtual servers, Clouni creates a key pair using the path to the key on the server where grpc-cotea is installed that you specify in <code class="docutils literal notranslate"><span class="pre">--public-key-path</span></code>.
+For creating key run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ssh-keygen
+</pre></div>
+</div>
 </section>
 <section id="database-api">
 <h2>Database API<a class="headerlink" href="#database-api" title="Permalink to this headline">¶</a></h2>
 <p>The installation guide is located in <a class="reference external" href="https://github.com/DYDKA4/API_COURSE">README.md</a>.</p>
+</section>
+<section id="logs">
+<h2>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h2>
+<p>Logs of each of the microservices can be found here:</p>
+<ol class="arabic simple">
+<li><p>provider tool - <strong>$HOME/.clouni-provider-tool.log</strong></p></li>
+<li><p>configuration tool - <strong>$HOME/.clouni-configuration-tool.log</strong></p></li>
+<li><p>grpc-cotea - <strong>$HOME/cotea.log</strong></p></li>
+</ol>
 </section>
 </section>
 
