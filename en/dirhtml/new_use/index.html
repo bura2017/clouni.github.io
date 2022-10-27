@@ -120,14 +120,14 @@
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DATABASE_API_ENDPOINT</span><span class="o">=</span><span class="m">4</span>.4.4.4:5000
 </pre></div>
 </div>
-<p>Если же данные переменные не указаны, Clouni использует параметры по умолчанию <strong>localhost:50051</strong> для provider tool, <strong>localhost:50052</strong> для configuration tool.
-Вы также можете поменять эти endpoints флагами <code class="docutils literal notranslate"><span class="pre">--provider-tool-endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">--configuration-tool-endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">--database-api-endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">--grpc-cotea-endpoint</span></code>.</p>
-<p>Если <strong>GRPC_COTEA_ENDPOINT</strong> не указан, то Clouni работает в режиме генератора Ansible плейбуков: не собирает факты из облака и не запускает Ansible скрипты для развертывания инфраструктуры.</p>
-<p>После выполнения плейбуков будет создан файл <strong>id_vars_{cluster-name}.yaml</strong>. Этот файл содержит идентификаторы всех ресурсов. Clouni использует этот файл для удаления соответствующих облачных ресурсов.</p>
-<p>Если <strong>DATABASE_API_ENDPOINT</strong> не указан, Clouni сохраняет только id разворачиваемых ресурсов в файле <strong>id_vars_{cluster-name}.yaml</strong>, иначе сохраняет узлы и отношения в полноценном виде в базе данных.</p>
-<p><strong>ВАЖНО!</strong>
-Чтобы использовать пользовательские Ansible скрипты для настройки ПО и дополнительной настройки инфраструктуры необходимо положить их в папку artifacts и переустановить клиент clouni.</p>
-<p>При запуске клиента с установленной environment переменной <strong>GRPC_COTEA_HOST_USER</strong> клиент подключается к серверу grpc-cotea по SSH (или копирует модули в нужное место при локальном использовании grpc-cotea) и передает туда дополнительные Ansible модули которые использует Clouni и пользовательские скрипты из папки artifacts. Достаточно использовать эту переменную только при первом запуске клиента.</p>
+<p>If these variables are not specified, Clouni uses default parameters <strong>localhost:50051</strong> for provider tool, <strong>localhost:50052</strong> for configuration tool.
+You can also change these endpoints with flags <code class="docutils literal notranslate"><span class="pre">--provider-tool-endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">--configuration-tool-endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">--database-api-endpoint</span></code>, <code class="docutils literal notranslate"><span class="pre">--grpc-cotea-endpoint</span></code>.</p>
+<p>If <strong>GRPC_COTEA_ENDPOINT</strong> is not specified, then Clouni works as Ansible playbook generator: it does not collect facts from the cloud and does not run Ansible scripts for infrastructure deployment.</p>
+<p>After the execution of creating playbooks, the file <strong>id_vars_{cluster-name}.yaml</strong> will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.</p>
+<p>If <strong>DATABASE_API_ENDPOINT</strong> is not specified, Clouni saves only the id of the deployed resources in <strong>id_vars_{cluster-name}.yaml</strong> file, otherwise it saves nodes and relationships in full view in the database.</p>
+<p><strong>IMPORTANT!</strong>
+To use custom Ansible scripts for software configuration and additional infrastructure configuration, you need to put them in the <strong>artifacts</strong> folder and <strong>reinstall</strong> the clouni client.</p>
+<p>When starting the client with the environment variable <strong>GRPC_COTEA_HOST_USER</strong> set, client connects to the grpc-cotea server via SSH and copies to remote host additional Ansible modules and user scripts from the <strong>artifacts</strong> folder (or copies modules to the right place when using grpc-cotea locally). It is enough to use this option only when the client is started for the first time.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">GRPC_COTEA_HOST_USER</span><span class="o">=</span>ubuntu
 </pre></div>
 </div>

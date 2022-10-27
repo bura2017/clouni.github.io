@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Использование Clouni по протоколу gRPC &#8212; документация Clouni 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="Об этих документах" href="../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../genindex/" />
+    <link rel="search" title="Поиск" href="../search/" />
+    <link rel="next" title="Использование локально в командной строке (deprecated version)" href="../use/" />
+    <link rel="prev" title="Использование клиента clouni" href="../new_use/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../">
+        Clouni</a>
+      <span class="navbar-text navbar-version pull-left"><b></b></span>
+    </div>
+
+      <div class="collapse navbar-collapse nav-collapse">
+        <ul class="nav navbar-nav">
+          
+              <li><a href="../../../en/dirhtml/">English Version</a></li>
+          
+          
+          
+          
+        </ul>
+
+        
+          
+<form class="navbar-form navbar-right" action="../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        
+        
+          
+            <ul class='nav navbar-nav navbar-right'>
+                
+  <li>
+    <a href="../new_use/" title="Previous Chapter: Использование клиента clouni"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Использование клиента clouni</span>
+    </a>
+  </li>
+  <li>
+    <a href="../use/" title="Next Chapter: Использование локально в командной строке (deprecated version)"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Использование локально ... &raquo;</span>
+    </a>
+  </li>
+            </ul>
+          
+        
+      </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Содержание:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/">О проекте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/">Установка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/">Установка (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../new_use/">Использование клиента clouni</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Использование Clouni по протоколу gRPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">Использование локально в командной строке (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conditions/">Скрипты для conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Тестирование</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="clouni-grpc">
+<h1>Использование Clouni по протоколу gRPC<a class="headerlink" href="#clouni-grpc" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Вместо использования стандартного клиента Clouni пользователь может написать свой, либо использовать обращения к Clouni внутри своего приложения.</p>
+<p>Для обеспечения такой возможности Clouni поддерживает обращения по протоколу gRPC.</p>
+<section id="clouni-provider-tool-configuration-tool">
+<h2>Clouni provider tool и configuration tool<a class="headerlink" href="#clouni-provider-tool-configuration-tool" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Proto файл описывающий вызовы API Clouni:</p>
+<div class="highlight-protobuf notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="kd">service</span><span class="w"> </span><span class="n">ClouniProviderTool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">rpc</span><span class="w"> </span><span class="n">ClouniProviderTool</span><span class="p">(</span><span class="n">ClouniProviderToolRequest</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">ClouniProviderToolResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">service</span><span class="w"> </span><span class="n">ClouniConfigurationTool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">rpc</span><span class="w"> </span><span class="n">ClouniConfigurationTool</span><span class="p">(</span><span class="n">ClouniConfigurationToolRequest</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">ClouniConfigurationToolResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="c1">// ClouniProviderTool request</span>
+<span class="c1">// Fields are specified in Clouni help</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">ClouniProviderToolRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">template_file_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">cluster_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="na">validate_only</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="na">delete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">configuration_tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="na">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">host_parameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">public_key_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">configuration_tool_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">grpc_cotea_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">database_api_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ClouniProviderTool response</span>
+<span class="c1">//      Status: TEMPLATE_VALID - returned for validate-only requests if template is valid</span>
+<span class="c1">//              TEMPLATE_INVALID - returned for validate-only requests if template is invalid</span>
+<span class="c1">//              OK - returned for normal execution of non-validate-only request</span>
+<span class="c1">//              ERROR - returned if any error occured</span>
+<span class="c1">//      Error: error description(only with ERROR status)</span>
+<span class="c1">//      Content: content of proceeded template file(only with OK status)</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">ClouniProviderToolResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">enum</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="na">TEMPLATE_VALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="na">TEMPLATE_INVALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="na">OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="na">ERROR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Status</span><span class="w"> </span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ClouniProviderTool request</span>
+<span class="c1">// Fields are specified in Clouni help</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">ClouniConfigurationToolRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">provider_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">cluster_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="na">validate_only</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="na">delete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">configuration_tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="na">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">database_api_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">grpc_cotea_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">ClouniConfigurationToolResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">enum</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="na">TEMPLATE_VALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="na">TEMPLATE_INVALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="na">OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="na">ERROR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Status</span><span class="w"> </span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="grpc-cotea">
+<h2>Grpc-cotea<a class="headerlink" href="#grpc-cotea" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Proto файл описывающий вызовы API grpc-cotea:</p>
+<div class="highlight-protobuf notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="kd">service</span><span class="w"> </span><span class="n">CoteaGateway</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">StartSession</span><span class="p">(</span><span class="n">EmptyMsg</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">StartSessionMSG</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">InitExecution</span><span class="p">(</span><span class="n">Config</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">Status</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">RunTask</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">TaskResults</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">StopExecution</span><span class="p">(</span><span class="n">SessionID</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">Status</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="c1">// rpc RestartExecution(SessionID) returns (Status) {}</span>
+<span class="p">}</span>
+
+<span class="kd">service</span><span class="w"> </span><span class="n">CoteaWorker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">InitExecution</span><span class="p">(</span><span class="n">WorkerConfig</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">Status</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">RunTask</span><span class="p">(</span><span class="n">WorkerTask</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">TaskResults</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">StopExecution</span><span class="p">(</span><span class="n">EmptyMsg</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">Status</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="k">rpc</span><span class="w"> </span><span class="n">HealthCheck</span><span class="p">(</span><span class="n">EmptyMsg</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="p">(</span><span class="n">WorkerHealthStatus</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">   </span><span class="c1">// rpc RestartExecution() returns (Status) {}</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">StartSessionMSG</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">error_msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">SessionID</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">session_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">EmptyMsg</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">MapFieldEntry</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">Config</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">session_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">inv_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">extra_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">   </span><span class="k">repeated</span><span class="w"> </span><span class="n">MapFieldEntry</span><span class="w"> </span><span class="na">env_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">ansible_library</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">not_gather_facts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">WorkerConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">inv_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">extra_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">   </span><span class="k">repeated</span><span class="w"> </span><span class="n">MapFieldEntry</span><span class="w"> </span><span class="na">env_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">ansible_library</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">not_gather_facts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">Task</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">session_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">task_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">WorkerTask</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">task_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">TaskResult</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">results_dict_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">task_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_failed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_skipped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_unreachable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_ignored_errors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">is_ignored_unreachable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">stdout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">stderr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">TaskResults</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">task_adding_ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">task_adding_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="k">repeated</span><span class="w"> </span><span class="n">TaskResult</span><span class="w"> </span><span class="na">task_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">Status</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="na">error_msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span><span class="w"> </span><span class="nc">WorkerHealthStatus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="na">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int32</span><span class="w"> </span><span class="na">executions_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int32</span><span class="w"> </span><span class="na">executed_tasks_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

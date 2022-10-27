@@ -14,19 +14,19 @@ Clouni also provides the ability to save deployed topology templates for cloud a
 ~~~shell
 export DATABASE_API_ENDPOINT=4.4.4.4:5000
 ~~~
-Если же данные переменные не указаны, Clouni использует параметры по умолчанию **localhost:50051** для provider tool, **localhost:50052** для configuration tool. 
-Вы также можете поменять эти endpoints флагами ```--provider-tool-endpoint```, ```--configuration-tool-endpoint```, ```--database-api-endpoint```, ```--grpc-cotea-endpoint```.
+If these variables are not specified, Clouni uses default parameters **localhost:50051** for provider tool, **localhost:50052** for configuration tool.
+You can also change these endpoints with flags ```--provider-tool-endpoint```, ```--configuration-tool-endpoint```, ```--database-api-endpoint```, ```--grpc-cotea-endpoint```.
 
-Если **GRPC_COTEA_ENDPOINT** не указан, то Clouni работает в режиме генератора Ansible плейбуков: не собирает факты из облака и не запускает Ansible скрипты для развертывания инфраструктуры.
+If **GRPC_COTEA_ENDPOINT** is not specified, then Clouni works as Ansible playbook generator: it does not collect facts from the cloud and does not run Ansible scripts for infrastructure deployment.
 
-После выполнения плейбуков будет создан файл **id_vars_{cluster-name}.yaml**. Этот файл содержит идентификаторы всех ресурсов. Clouni использует этот файл для удаления соответствующих облачных ресурсов.
+After the execution of creating playbooks, the file **id_vars_{cluster-name}.yaml** will be created. This file contains all resources ids. Deleting playbook uses ids from this file and after successful deleting removes file too.
 
-Если **DATABASE_API_ENDPOINT** не указан, Clouni сохраняет только id разворачиваемых ресурсов в файле **id_vars_{cluster-name}.yaml**, иначе сохраняет узлы и отношения в полноценном виде в базе данных.
+If **DATABASE_API_ENDPOINT** is not specified, Clouni saves only the id of the deployed resources in **id_vars_{cluster-name}.yaml** file, otherwise it saves nodes and relationships in full view in the database.
 
-**ВАЖНО!**
-Чтобы использовать пользовательские Ansible скрипты для настройки ПО и дополнительной настройки инфраструктуры необходимо положить их в папку artifacts и переустановить клиент clouni.
+**IMPORTANT!**
+To use custom Ansible scripts for software configuration and additional infrastructure configuration, you need to put them in the **artifacts** folder and **reinstall** the clouni client.
 
-При запуске клиента с установленной environment переменной **GRPC_COTEA_HOST_USER** клиент подключается к серверу grpc-cotea по SSH (или копирует модули в нужное место при локальном использовании grpc-cotea) и передает туда дополнительные Ansible модули которые использует Clouni и пользовательские скрипты из папки artifacts. Достаточно использовать эту переменную только при первом запуске клиента.
+When starting the client with the environment variable **GRPC_COTEA_HOST_USER** set, client connects to the grpc-cotea server via SSH and copies to remote host additional Ansible modules and user scripts from the **artifacts** folder (or copies modules to the right place when using grpc-cotea locally). It is enough to use this option only when the client is started for the first time.
 ~~~shell
 export GRPC_COTEA_HOST_USER=ubuntu
 ~~~
