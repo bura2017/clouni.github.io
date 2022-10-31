@@ -14,6 +14,7 @@ Welcome to Clouni's documentation!
    server
    install
    new_use
+   templates
    grpc
    use
    provider

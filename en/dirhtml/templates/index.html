@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Templates &#8212; Clouni 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="../about/" />
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Using Clouni over the gRPC protocol" href="../grpc/" />
+    <link rel="prev" title="Using the clouni client" href="../new_use/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../">
+        Clouni</a>
+      <span class="navbar-text navbar-version pull-left"><b></b></span>
+    </div>
+
+      <div class="collapse navbar-collapse nav-collapse">
+        <ul class="nav navbar-nav">
+          
+              <li><a href="../../../ru/dirhtml/">Russian Version</a></li>
+          
+          
+          
+          
+        </ul>
+
+        
+          
+<form class="navbar-form navbar-right" action="../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        
+        
+          
+            <ul class='nav navbar-nav navbar-right'>
+                
+  <li>
+    <a href="../new_use/" title="Previous Chapter: Using the clouni client"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Using the clouni client</span>
+    </a>
+  </li>
+  <li>
+    <a href="../grpc/" title="Next Chapter: Using Clouni over the gRPC protocol"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Using Clouni over the g... &raquo;</span>
+    </a>
+  </li>
+            </ul>
+          
+        
+      </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/">Installation (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../new_use/">Using the clouni client</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grpc/">Using Clouni over the gRPC protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage (deprecated version)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../provider/">Adding new provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conditions/">Filter conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="templates">
+<h1>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h1>
+<p><em><strong>Will be updated!</strong></em></p>
+<section id="implementations-operations-and-the-order-of-their-execution">
+<h2>Implementations operations and the order of their execution<a class="headerlink" href="#implementations-operations-and-the-order-of-their-execution" title="Permalink to this headline">¶</a></h2>
+<p>Currently Clouni supports the following operations:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tosca.interfaces.node.lifecycle.Standard</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">derived_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca.interfaces.Root</span><span class="w"></span>
+<span class="w">  </span><span class="nt">create</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard lifecycle create operation.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">configure</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard lifecycle configure operation.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">start</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard lifecycle start operation.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">stop</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard lifecycle stop operation.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">delete</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard lifecycle delete operation.</span><span class="w"></span>
+
+<span class="nt">tosca.interfaces.relationship.Configure</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">derived_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tosca.interfaces.Root</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pre_configure_source</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to pre-configure the source endpoint.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pre_configure_target</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to pre-configure the target endpoint.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">post_configure_source</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to post-configure the source endpoint.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">post_configure_target</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to post-configure the target endpoint.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">add_target</span><span class="p">:</span><span class="w"> </span><span class="c1"># not implemented</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to notify the source node of a target node being added via a relationship.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">add_source</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to notify the target node of a source node which is now available via a relationship.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">target_changed</span><span class="p">:</span><span class="w"> </span><span class="c1"># not implemented</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to notify source some property or attribute of the target changed</span><span class="w"></span>
+<span class="w">  </span><span class="nt">remove_target</span><span class="p">:</span><span class="w"> </span><span class="c1"># not implemented</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Operation to remove a target node.</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>The order of execution is as follows:</p>
+<ol class="arabic simple">
+<li><p>create (an operation that is always there, even if it is not explicitly specified in implementations)</p></li>
+<li><p>pre_configure_source и pre_configure_target</p></li>
+<li><p>configure</p></li>
+<li><p>post_configure_source и post_configure_target</p></li>
+<li><p>start</p></li>
+<li><p>stop</p></li>
+<li><p>delete (yes, you can specify deletion operation when creating)</p></li>
+</ol>
+<p>If the node is of type <strong>SoftwareComponent</strong> or derived from <strong>SoftwareComponent</strong> then the operation will be executed on a remote node, otherwise locally.
+For relationships operations, it matters what type SOURCE and TARGET have.</p>
+<p>When executing the <strong>clouni delete</strong> command, all create operations are replaced with delete operations,
+and the rest of the operations are not performed (since delete has the lowest priority).</p>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ISP RAS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
