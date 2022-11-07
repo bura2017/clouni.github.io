@@ -93,6 +93,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/">Installation (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../new_use/">Using the clouni client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../templates/">Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grpc/">Using Clouni over the gRPC protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../use/">CLI usage (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../provider/">Adding new provider</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Filter conditions</a></li>
@@ -108,17 +110,22 @@
 <section id="clouni-client">
 <h2>Clouni client<a class="headerlink" href="#clouni-client" title="Permalink to this headline">¶</a></h2>
 <p>Clouni requires Python 3.6+ to be used.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_client
-</pre></div>
-</div>
 <p>To install Clouni client is recommended to create virtual environment and install
 requirements in your environment.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+<span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
+</pre></div>
+</div>
+<p>With pip (without easy install scripts):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --extra-index-url https://test.pypi.org/simple/ clouni-client
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_client
 </pre></div>
 </div>
 <p>It’s recommended not to use <code class="docutils literal notranslate"><span class="pre">$CLOUNI_HOME</span></code> as your <code class="docutils literal notranslate"><span class="pre">$VIRTUALENV_HOME</span></code>.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
-<span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
 pip install -r requirements.txt
 python setup.py install
 </pre></div>
@@ -140,27 +147,57 @@ python setup.py install
 <p>Then run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">ansible</span><span class="o">==</span><span class="m">2</span>.9.19
 ansible-galaxy collection install community.crypto
+<span class="nb">cd</span> ansible_installer
 ansible-playbook main.yaml -i hosts.ini
 </pre></div>
 </div>
+<p><strong>IMPORTANT!</strong> For authentication in the cloud based on OpenStack Clouni uses the clouds.yaml file. You can download it from your cloud provider site. It is necessary to place this file in /etc/openstack dir on the client’s computer (in the case of easy install or docker install), or on a server with grpc cotea.
+<strong>Do not forget to enter your password/token in this file.</strong></p>
 <p><strong>For local deployment:</strong></p>
-<p>Replace addresses to 127.0.0.1 or localhost in hosts.ini</p>
+<p>Replace addresses to 127.0.0.1 or localhost in hosts.ini. Example:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[provider_tool_host]</span><span class="w"></span>
+<span class="na">localhost ansible_connection</span><span class="o">=</span><span class="s">local</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="docker-install">
+<h2>Docker install<a class="headerlink" href="#docker-install" title="Permalink to this headline">¶</a></h2>
+<p>Run following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> compose_installer
+docker-compose up -d
+</pre></div>
+</div>
+<p>You can also install each of the services in Docker separately:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run --name clouni-provider-tool -d -p &lt;ip_address&gt;:&lt;port&gt;:50051 clouni/clouni-provider-tool:latest
+docker run --name clouni-configuration-tool -d -p &lt;ip_address&gt;:&lt;port&gt;:50052 clouni/clouni-configuration-tool:latest
+docker run --name grpc-cotea -d -p &lt;ip_address&gt;:&lt;port&gt;:50151 clouni/grpc-cotea:latest
+</pre></div>
+</div>
+<p>Or build an image from Dockerfile (located in the root folder of services):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_PROVIDER_TOOL_HOME</span>
+docker build -t clouni-provider-tool - &lt; dockerfile
+<span class="nb">cd</span> <span class="nv">$CLOUNI_CONFIGURATION_TOOL_HOME</span>
+docker build -t clouni-configuration-tool - &lt; dockerfile
+</pre></div>
+</div>
 </section>
 <section id="clouni-provider-tool">
 <h2>Clouni provider tool<a class="headerlink" href="#clouni-provider-tool" title="Permalink to this headline">¶</a></h2>
-<p>Clouni provider tool requires Python 3.6 to be used.</p>
+<p>Clouni provider tool requires Python 3.6+ to be used.</p>
 <p>To install Clouni provider tool is recommended to create virtual environment and install
 requirements in your environment.</p>
 <p>The user can install the services manually.
 To do this, run the following commands on the Clouni provider tool server.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/bura2017/tosca-parser.git
-git clone https://github.com/sadimer/clouni_provider_tool
-python3.6 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
 <span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
-<span class="nb">cd</span> tosca-parser
-git checkout develop
-pip install -r requirements.txt
-python setup.py install
+</pre></div>
+</div>
+<p>With pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --extra-index-url https://test.pypi.org/simple/ clouni-provider-tool
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_provider_tool
 <span class="nb">cd</span> <span class="nv">$CLOUNI_PROVIDER_TOOL_HOME</span>
 pip install -r requirements.txt
 python setup.py install
@@ -173,19 +210,21 @@ python setup.py install
 </section>
 <section id="clouni-configuration-tool">
 <h2>Clouni configuration tool<a class="headerlink" href="#clouni-configuration-tool" title="Permalink to this headline">¶</a></h2>
-<p>Clouni configuration tool requires Python 3.6 to be used.</p>
+<p>Clouni configuration tool requires Python 3.6+ to be used.</p>
 <p>To install Clouni configuration tool is recommended to create virtual environment and install
 requirements in your environment.</p>
 <p>The user can install the services manually.
 To do this, run the following commands on the Clouni configuration tool server.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/bura2017/tosca-parser.git
-git clone https://github.com/sadimer/clouni_configuration_tool
-python3.6 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
 <span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
-<span class="nb">cd</span> tosca-parser
-git checkout develop
-pip install -r requirements.txt
-python setup.py install
+</pre></div>
+</div>
+<p>With pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --extra-index-url https://test.pypi.org/simple/ clouni-configuration-tool
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_configuration_tool
 <span class="nb">cd</span> <span class="nv">$CLOUNI_CONFIGURATION_TOOL_HOME</span>
 pip install -r requirements.txt
 python setup.py install
@@ -199,8 +238,8 @@ python setup.py install
 <section id="grpc-cotea">
 <h2>Grpc cotea<a class="headerlink" href="#grpc-cotea" title="Permalink to this headline">¶</a></h2>
 <p>The user can install the services manually.
-Grpc-cotea requires Python 3.8 to be used.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3.8 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+Grpc-cotea requires Python 3.8+ to be used.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
 <span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
 pip install <span class="nv">grpcio</span><span class="o">==</span><span class="m">1</span>.37.1
 pip install grpcio-tools<span class="o">==</span><span class="m">1</span>.37.1
@@ -214,9 +253,8 @@ pip install boto3 botocore urllib3 bs4
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nohup grpc-cotea --host <span class="o">{</span> please insert here host ip address <span class="o">}</span> -p <span class="m">5000</span> <span class="p">&amp;</span>
 </pre></div>
 </div>
-<p>Create directories for additional modules and artifacts (custom Ansible scripts):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p /tmp/clouni/ansible
-mkdir -p /tmp/clouni/artifacts
+<p>Create directory for additional modules and artifacts (custom Ansible scripts):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p /tmp/clouni/
 </pre></div>
 </div>
 <p><strong>Don’t forget about authentication!</strong> Most of providers require authentication for using there resources.

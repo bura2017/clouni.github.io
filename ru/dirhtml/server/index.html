@@ -94,6 +94,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Установка</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/">Установка (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../new_use/">Использование клиента clouni</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../templates/">Написание шаблонов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grpc/">Использование Clouni по протоколу gRPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../use/">Использование локально в командной строке (deprecated version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conditions/">Скрипты для conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing/">Тестирование</a></li>
@@ -107,17 +109,22 @@
 <h1>Установка<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
 <section id="clouni-client">
 <h2>Clouni client<a class="headerlink" href="#clouni-client" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Для установки клиента рекомендуется Python версии 3.6+</p>
+<p>Для установки клиента рекомендуется Python версии 3.6.9</p>
+<p>Рекомендуется использовать виртуальное окружение для облегчения установки зависимостей.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+<span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
+</pre></div>
+</div>
+<p>С помощью pip (без скриптов easy install):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --extra-index-url https://test.pypi.org/simple/ clouni-client
+</pre></div>
+</div>
+<p>Или:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_client
 </pre></div>
 </div>
-<p>Рекомендуется использовать виртуальное окружение для облегчения установки зависимостей.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
-</pre></div>
-</div>
 <p>Не рекомендутся использовать <code class="docutils literal notranslate"><span class="pre">$CLOUNI_HOME</span></code> в качестве <code class="docutils literal notranslate"><span class="pre">$VIRTUALENV_HOME</span></code>.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
-<span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_HOME</span>
 pip install -r requirements.txt
 python setup.py install
 </pre></div>
@@ -139,26 +146,56 @@ python setup.py install
 <p>Затем выполните:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">ansible</span><span class="o">==</span><span class="m">2</span>.9.19
 ansible-galaxy collection install community.crypto
+<span class="nb">cd</span> ansible_installer
 ansible-playbook main.yaml -i hosts.ini
 </pre></div>
 </div>
+<p><strong>ВАЖНО!</strong> Для аутентификации в облаке на базе OpenStack Clouni использует файл clouds.yaml, его вы можете скачать у своего облачного провайдера. Необходимо разместить этот файл в /etc/openstack либо на компьютере клиента (в случае установки easy install, либо docker install), либо на сервере с grpc cotea. <strong>Не забывайте вписать в него свой пароль/токен.</strong></p>
 <p><strong>Для локальной установки:</strong></p>
-<p>Замените все адреса на 127.0.0.1 или localhost в файле hosts.ini.</p>
+<p>Замените все адреса на 127.0.0.1 или localhost в файле hosts.ini.
+Пример:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[provider_tool_host]</span><span class="w"></span>
+<span class="na">localhost ansible_connection</span><span class="o">=</span><span class="s">local</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="docker-install">
+<h2>Docker install<a class="headerlink" href="#docker-install" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Выполните:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> compose_installer
+docker-compose up -d
+</pre></div>
+</div>
+<p>Также вы можете установить каждый из сервисов в Docker по отдельности:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run --name clouni-provider-tool -d -p &lt;ip_address&gt;:&lt;port&gt;:50051 clouni/clouni-provider-tool:latest
+docker run --name clouni-configuration-tool -d -p &lt;ip_address&gt;:&lt;port&gt;:50052 clouni/clouni-configuration-tool:latest
+docker run --name grpc-cotea -d -p &lt;ip_address&gt;:&lt;port&gt;:50151 clouni/grpc-cotea:latest
+</pre></div>
+</div>
+<p>Или же собрать образ из Dockerfile (находятся в корневой папке любого из сервисов):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$CLOUNI_PROVIDER_TOOL_HOME</span>
+docker build -t clouni-provider-tool - &lt; dockerfile
+<span class="nb">cd</span> <span class="nv">$CLOUNI_CONFIGURATION_TOOL_HOME</span>
+docker build -t clouni-configuration-tool - &lt; dockerfile
+</pre></div>
+</div>
 </section>
 <section id="clouni-provider-tool">
 <h2>Clouni provider tool<a class="headerlink" href="#clouni-provider-tool" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Для установки provider tool требуется Python версии 3.6.</p>
+<p>Для установки provider tool требуется Python версии 3.6+</p>
 <p>Рекомендуется использовать виртуальное окружение для облегчения установки зависимостей.</p>
 <p>Можно и не использовать скрипт из easy install и установить сервисы вручную.
 Для этого на сервере, на котором вы хотите установить Clouni provider tool выполните следующее:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/bura2017/tosca-parser.git
-git clone https://github.com/sadimer/clouni_provider_tool
-python3.6 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
 <span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
-<span class="nb">cd</span> tosca-parser
-git checkout develop
-pip install -r requirements.txt
-python setup.py install
+</pre></div>
+</div>
+<p>С помощью pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --extra-index-url https://test.pypi.org/simple/ clouni-provider-tool
+</pre></div>
+</div>
+<p>Или:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_provider_tool
 <span class="nb">cd</span> <span class="nv">$CLOUNI_PROVIDER_TOOL_HOME</span>
 pip install -r requirements.txt
 python setup.py install
@@ -171,18 +208,20 @@ python setup.py install
 </section>
 <section id="clouni-configuration-tool">
 <h2>Clouni configuration tool<a class="headerlink" href="#clouni-configuration-tool" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Для установки configuration tool требуется Python версии 3.6.</p>
+<p>Для установки configuration tool требуется Python версии 3.6+</p>
 <p>Рекомендуется использовать виртуальное окружение для облегчения установки зависимостей.</p>
 <p>Можно и не использовать скрипт из easy install и установить сервисы вручную.
 Для этого на сервере, на котором вы хотите установить Clouni configuration tool выполните следующее:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/bura2017/tosca-parser.git
-git clone https://github.com/sadimer/clouni_configuration_tool
-python3.6 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
 <span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
-<span class="nb">cd</span> tosca-parser
-git checkout develop
-pip install -r requirements.txt
-python setup.py install
+</pre></div>
+</div>
+<p>С помощью pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --extra-index-url https://test.pypi.org/simple/ clouni-configuration-tool
+</pre></div>
+</div>
+<p>Или:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/sadimer/clouni_configuration_tool
 <span class="nb">cd</span> <span class="nv">$CLOUNI_CONFIGURATION_TOOL_HOME</span>
 pip install -r requirements.txt
 python setup.py install
@@ -196,8 +235,8 @@ python setup.py install
 <section id="grpc-cotea">
 <h2>Grpc cotea<a class="headerlink" href="#grpc-cotea" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Можно и не использовать скрипт из easy install и установить сервисы вручную.
-Для установки grpc-cotea требуется Python версии 3.8.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3.8 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
+Для установки grpc-cotea требуется Python версии 3.8+.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv <span class="nv">$VIRTUALENV_HOME</span>/clouni
 <span class="nb">source</span> <span class="nv">$VIRTUALENV_HOME</span>/clouni/bin/activate
 pip install <span class="nv">grpcio</span><span class="o">==</span><span class="m">1</span>.37.1
 pip install grpcio-tools<span class="o">==</span><span class="m">1</span>.37.1
@@ -211,9 +250,8 @@ pip install boto3 botocore urllib3 bs4
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nohup grpc-cotea --host <span class="o">{</span> please insert here host ip address <span class="o">}</span> -p <span class="m">5000</span> <span class="p">&amp;</span>
 </pre></div>
 </div>
-<p>Создайте директории для дополнительных модулей и артефактов (пользовательских скриптов):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p /tmp/clouni/ansible
-mkdir -p /tmp/clouni/artifacts
+<p>Создайте временную директорию для дополнительных модулей и артефактов (пользовательских скриптов):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p /tmp/clouni/
 </pre></div>
 </div>
 <p><strong>Не забывайте об аутентификации!</strong> Большинству провайдеров требуется аутентификация для использования облачных ресурсов.
