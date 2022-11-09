@@ -48,7 +48,7 @@ cd ansible_installer
 ansible-playbook main.yaml -i hosts.ini
 ~~~
 
-**IMPORTANT!** For authentication in the cloud based on OpenStack Clouni uses the clouds.yaml file. You can download it from your cloud provider site. It is necessary to place this file in /etc/openstack dir on the client's computer (in the case of easy install or docker install), or on a server with grpc cotea. The same logic applies to the ~/.avs/credentials and ~/.ams/config files when using the AmazonAWS provider.
+**IMPORTANT!** For authentication in the cloud based on OpenStack Clouni uses the clouds.yaml file. You can download it from your cloud provider site. It is necessary to place this file in /etc/openstack dir on the client's computer (in the case of easy install or docker install), or on a server with grpc cotea. The same logic applies to the ~/.aws/credentials and ~/.aws/config files when using the Amazon AWS provider.
 **Do not forget to enter your password/token in this file.**
 
 **For local deployment:**
@@ -157,7 +157,7 @@ mkdir -p /tmp/clouni/
 ~~~
 **Don't forget about authentication!** Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
-you must download your OpenStack RC file and *source* it or use the clouds.yaml file on the server where grpc-cotea is installed. The same logic applies to the ~/.avs/credentials and ~/.ams/config files when using the Amazon AWS provider.
+you must download your OpenStack RC file and *source* it or use the clouds.yaml file on the server where grpc-cotea is installed. The same logic applies to the ~/.aws/credentials and ~/.aws/config files when using the Amazon AWS provider.
 
 For software configuration on virtual servers, Clouni creates a key pair using the path to the key on the server where grpc-cotea is installed that you specify in ```--public-key-path```.
 For creating key run:
