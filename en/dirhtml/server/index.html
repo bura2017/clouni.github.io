@@ -151,7 +151,7 @@ ansible-galaxy collection install community.crypto
 ansible-playbook main.yaml -i hosts.ini
 </pre></div>
 </div>
-<p><strong>IMPORTANT!</strong> For authentication in the cloud based on OpenStack Clouni uses the clouds.yaml file. You can download it from your cloud provider site. It is necessary to place this file in /etc/openstack dir on the client’s computer (in the case of easy install or docker install), or on a server with grpc cotea.
+<p><strong>IMPORTANT!</strong> For authentication in the cloud based on OpenStack Clouni uses the clouds.yaml file. You can download it from your cloud provider site. It is necessary to place this file in /etc/openstack dir on the client’s computer (in the case of easy install or docker install), or on a server with grpc cotea. The same logic applies to the ~/.avs/credentials and ~/.ams/config files when using the AmazonAWS provider.
 <strong>Do not forget to enter your password/token in this file.</strong></p>
 <p><strong>For local deployment:</strong></p>
 <p>Replace addresses to 127.0.0.1 or localhost in hosts.ini. Example:</p>
@@ -259,7 +259,7 @@ pip install boto3 botocore urllib3 bs4
 </div>
 <p><strong>Don’t forget about authentication!</strong> Most of providers require authentication for using there resources.
 Authentication is users responsibility. For example, to use OpenStack
-you must download your OpenStack RC file and <em>source</em> it or use the clouds.yaml file on the server where grpc-cotea is installed.</p>
+you must download your OpenStack RC file and <em>source</em> it or use the clouds.yaml file on the server where grpc-cotea is installed. The same logic applies to the ~/.avs/credentials and ~/.ams/config files when using the Amazon AWS provider.</p>
 <p>For software configuration on virtual servers, Clouni creates a key pair using the path to the key on the server where grpc-cotea is installed that you specify in <code class="docutils literal notranslate"><span class="pre">--public-key-path</span></code>.
 For creating key run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ssh-keygen

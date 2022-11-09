@@ -150,7 +150,7 @@ ansible-galaxy collection install community.crypto
 ansible-playbook main.yaml -i hosts.ini
 </pre></div>
 </div>
-<p><strong>ВАЖНО!</strong> Для аутентификации в облаке на базе OpenStack Clouni использует файл clouds.yaml, его вы можете скачать у своего облачного провайдера. Необходимо разместить этот файл в /etc/openstack либо на компьютере клиента (в случае установки easy install, либо docker install), либо на сервере с grpc cotea. <strong>Не забывайте вписать в него свой пароль/токен.</strong></p>
+<p><strong>ВАЖНО!</strong> Для аутентификации в облаке на базе OpenStack Clouni использует файл clouds.yaml, его вы можете скачать у своего облачного провайдера. Необходимо разместить этот файл в /etc/openstack либо на компьютере клиента (в случае установки easy install, либо docker install), либо на сервере с grpc cotea. <strong>Не забывайте вписать в него свой пароль/токен.</strong> Аналогичная логика применима для файлов ~/.aws/credentials и ~/.aws/config в случае использования провайдера Amazon AWS.</p>
 <p><strong>Для локальной установки:</strong></p>
 <p>Замените все адреса на 127.0.0.1 или localhost в файле hosts.ini.
 Пример:</p>
@@ -255,7 +255,7 @@ pip install boto3 botocore urllib3 bs4
 </pre></div>
 </div>
 <p><strong>Не забывайте об аутентификации!</strong> Большинству провайдеров требуется аутентификация для использования облачных ресурсов.
-Аутентификация - это ответственность пользователей. Например, чтобы использовать OpenStack, вы должны загрузить свой RC-файл OpenStack, либо же использовать файл clouds.yaml на сервере где запущена grpc-cotea.</p>
+Аутентификация - это ответственность пользователей. Например, чтобы использовать OpenStack, вы должны загрузить свой RC-файл OpenStack, либо же использовать файл clouds.yaml на сервере где запущена grpc-cotea. Аналогичная логика применима для файлов ~/.aws/credentials и ~/.aws/config в случае использования провайдера Amazon AWS.</p>
 <p>Для конфигурации програмнного обеспечения на виртуальных серверах Clouni создает ключевую пару используя путь к публичному ключу, который вы укажете в <code class="docutils literal notranslate"><span class="pre">--public-key-path</span></code>. Важно что этот ключ должен находиться на сервере где запущена grpc-cotea.
 Для его генерации можно использовать команду:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ssh-keygen
